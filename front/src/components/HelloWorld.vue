@@ -19,9 +19,9 @@ export default {
         }
     },
     created() {
-        axios.get(process.env.API_URL + "/user")
+        axios.get(process.env.VUE_APP_API_URL + "/user")
             .then(res => {
-                this.content = res;
+                this.content = res.data;
             })
             .catch(console.error);
     }

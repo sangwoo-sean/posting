@@ -28,4 +28,9 @@ public class UserController {
         userService.deleteUser();
         return ResponseEntity.ok(null);
     }
+
+    @GetMapping
+    public ResponseEntity test() {
+        return ResponseEntity.ok("Hello world");
+    }
 }
