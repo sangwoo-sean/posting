@@ -1,6 +1,7 @@
 package sangwoo.posting.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sangwoo.posting.user.dto.UserDto;
@@ -11,9 +12,12 @@ import sangwoo.posting.user.dto.UserDto;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public void createUser(UserDto userDto) { //회원가입
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+        userDto.setPassword(encodedPassword);
         User user = User.register(userDto);
         userRepository.save(user);
     }
