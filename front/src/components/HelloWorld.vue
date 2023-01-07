@@ -11,6 +11,7 @@
           <input type="password" v-model="user.password">
       </div>
       <button @click="registerUser">회원가입</button>
+      <button @click="login">로그인</button>
   </div>
 </template>
 
@@ -41,9 +42,28 @@ export default {
     methods: {
         registerUser() {
             axios.post(process.env.VUE_APP_API_URL + "/user", this.user)
-                .then(console.log)
-                .catch(console.error)
-        }
+                .then(res => {
+                    alert("회원가입 되었습니다. 가입하신 계정으로 로그인 해주세요.");
+                    this.user.email = "";
+                    this.user.password = "";
+                })
+                .catch(e => {
+                    console.error(e);
+                    alert(e.response.data.defaultMessage);
+                })
+        },
+        login() {
+            axios.post(process.env.VUE_APP_API_URL + "/login", this.user)
+                .then(res => {
+                    alert("로그인 성공!");
+                    this.user.email = "";
+                    this.user.password = "";
+                })
+                .catch(e => {
+                    console.error(e);
+                    alert(e.response.data.defaultMessage);
+                })
+        },
     },
 }
 </script>

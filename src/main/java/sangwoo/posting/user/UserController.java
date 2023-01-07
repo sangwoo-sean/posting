@@ -2,6 +2,8 @@ package sangwoo.posting.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import sangwoo.posting.user.dto.UserDto;
 
@@ -13,8 +15,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity createUser(@RequestBody UserDto userDto) { //회원가입
-        //todo: validation
+    public ResponseEntity createUser(@Validated @RequestBody UserDto userDto, BindingResult bindingResult) { //회원가입
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest()
+                    .body(bindingResult.getFieldError());
+        }
         userService.createUser(userDto);
         return ResponseEntity.ok(null);
     }
