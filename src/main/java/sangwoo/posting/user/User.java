@@ -1,6 +1,7 @@
 package sangwoo.posting.user;
 
 import lombok.Getter;
+import sangwoo.posting.user.dto.UserDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,6 +19,18 @@ public class User {
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime deletedAt;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
+
+    public static User register(UserDto userDto) {
+        User user = new User();
+        user.email = userDto.getEmail();
+        user.password = userDto.getPassword();
+        return user;
+    }
 
     public void update() {
         //todo: update info

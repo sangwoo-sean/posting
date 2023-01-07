@@ -3,6 +3,7 @@ package sangwoo.posting.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sangwoo.posting.user.dto.UserDto;
 
 @Service
 @RequiredArgsConstructor
@@ -12,8 +13,9 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void createUser() { //회원가입
-        userRepository.save(new User());
+    public void createUser(UserDto userDto) { //회원가입
+        User user = User.register(userDto);
+        userRepository.save(user);
     }
 
     @Transactional

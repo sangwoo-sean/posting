@@ -2,6 +2,15 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
       <h2>{{content}}</h2>
+      <div>
+          <label>메일</label>
+          <input type="email" v-model="user.email">
+      </div>
+      <div>
+          <label>비밀번호</label>
+          <input type="password" v-model="user.password">
+      </div>
+      <button @click="registerUser">회원가입</button>
   </div>
 </template>
 
@@ -15,7 +24,11 @@ export default {
     },
     data() {
         return {
-            content: ""
+            content: "",
+            user: {
+                email: "",
+                password: ""
+            }
         }
     },
     created() {
@@ -24,7 +37,14 @@ export default {
                 this.content = res.data;
             })
             .catch(console.error);
-    }
+    },
+    methods: {
+        registerUser() {
+            axios.post(process.env.VUE_APP_API_URL + "/user", this.user)
+                .then(console.log)
+                .catch(console.error)
+        }
+    },
 }
 </script>
 
