@@ -35,3 +35,20 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### front
+front/.DS_Store
+front/node_modules
+front/dist
+
+# local env files
+front/.env.local
+front/.env.*.local
+
+# Log files
+front/npm-debug.log*
+front/yarn-debug.log*
+front/yarn-error.log*
+front/pnpm-debug.log*
+
+front/package-lock.json
