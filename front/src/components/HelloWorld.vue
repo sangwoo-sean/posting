@@ -48,7 +48,6 @@ export default {
                     this.user.password = "";
                 })
                 .catch(e => {
-                    console.error(e);
                     alert(e.response.data.defaultMessage);
                 })
         },
@@ -60,8 +59,7 @@ export default {
                     this.user.password = "";
                 })
                 .catch(e => {
-                    console.error(e);
-                    alert(e.response.data.defaultMessage);
+                    alert(e.response.data.defaultMessage ?? e.response.data)
                 })
         },
     },

@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 @Setter
 public class UserDto {
     @NotBlank(message = "이메일은 공백일 수 없습니다.")
-    @Email(message = "올바른 메일 형식이 아닙니다.")
+    @Email(message = "올바른 이메일 형식이 아닙니다.")
     private String email;
 
     @NotBlank(message = "비밀번호는 공백일 수 없습니다.")
