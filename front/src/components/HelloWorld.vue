@@ -1,7 +1,6 @@
 <template>
     <div class="hello">
         <h1>{{ msg }}</h1>
-        <h2>{{ content }}</h2>
         <div>
             <label>메일</label>
             <input type="email" v-model="user.email" />
@@ -32,20 +31,11 @@ export default {
     },
     data() {
         return {
-            content: "",
             user: {
                 email: "",
                 password: "",
             },
         };
-    },
-    created() {
-        axios
-            .get(process.env.VUE_APP_API_URL + "/user")
-            .then((res) => {
-                this.content = res.data;
-            })
-            .catch(console.error);
     },
     methods: {
         registerUser() {
@@ -72,6 +62,7 @@ export default {
                     this.user.password = "";
                 })
                 .catch((e) => {
+                    console.error(e);
                     alert(e.response.data.defaultMessage ?? e.response.data);
                 });
         },
