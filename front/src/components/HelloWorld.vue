@@ -1,19 +1,24 @@
 <template>
     <div class="hello">
-        <h1>{{ msg }}</h1>
-        <div>
-            <label>메일</label>
-            <input type="email" v-model="user.email" />
+        <div v-if="!userStore.token">
+            <h2>로그인하세요</h2>
+            <div>
+                <label>메일</label>
+                <input type="email" v-model="user.email" />
+            </div>
+            <div>
+                <label>비밀번호</label>
+                <input type="password" v-model="user.password" />
+            </div>
+            <button @click="registerUser">회원가입</button>
+            <button @click="login">로그인</button>
         </div>
-        <div>
-            <label>비밀번호</label>
-            <input type="password" v-model="user.password" />
+        <div v-else>
+            <h2>환영합니다</h2>
+            <div>{{ userStore.email }}</div>
+            <div>{{ userStore.token }}</div>
+            <button @click="requestSomething">USER 전용 API 호출</button>
         </div>
-        <button @click="registerUser">회원가입</button>
-        <button @click="login">로그인</button>
-        <div>{{ userStore.email }}</div>
-        <div>{{ userStore.token }}</div>
-        <button @click="requestSomething">USER 전용 API 호출</button>
     </div>
 </template>
 
@@ -23,9 +28,6 @@ import { useUserStore } from "@/stores/userStore";
 
 export default {
     name: "HelloWorld",
-    props: {
-        msg: String,
-    },
     setup() {
         const userStore = useUserStore();
         return { userStore };
