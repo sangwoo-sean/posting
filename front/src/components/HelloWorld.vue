@@ -1,95 +1,98 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-      <h2>{{content}}</h2>
-      <div>
-          <label>메일</label>
-          <input type="email" v-model="user.email">
-      </div>
-      <div>
-          <label>비밀번호</label>
-          <input type="password" v-model="user.password">
-      </div>
-      <button @click="registerUser">회원가입</button>
-      <button @click="login">로그인</button>
-      <div>{{userStore.email}}</div>
-      <div>{{userStore.token}}</div>
-  </div>
+    <div class="hello">
+        <h1>{{ msg }}</h1>
+        <h2>{{ content }}</h2>
+        <div>
+            <label>메일</label>
+            <input type="email" v-model="user.email" />
+        </div>
+        <div>
+            <label>비밀번호</label>
+            <input type="password" v-model="user.password" />
+        </div>
+        <button @click="registerUser">회원가입</button>
+        <button @click="login">로그인</button>
+        <div>{{ userStore.email }}</div>
+        <div>{{ userStore.token }}</div>
+    </div>
 </template>
 
 <script>
-import axios from 'axios';
-import {useUserStore} from "@/stores/userStore";
+import axios from "axios";
+import { useUserStore } from "@/stores/userStore";
 
 export default {
-    name: 'HelloWorld',
+    name: "HelloWorld",
     props: {
-        msg: String
+        msg: String,
     },
     setup() {
         const userStore = useUserStore();
-        return { userStore }
+        return { userStore };
     },
     data() {
         return {
             content: "",
             user: {
                 email: "",
-                password: ""
-            }
-        }
+                password: "",
+            },
+        };
     },
     created() {
-        axios.get(process.env.VUE_APP_API_URL + "/user")
-            .then(res => {
+        axios
+            .get(process.env.VUE_APP_API_URL + "/user")
+            .then((res) => {
                 this.content = res.data;
             })
             .catch(console.error);
     },
     methods: {
         registerUser() {
-            axios.post(process.env.VUE_APP_API_URL + "/user", this.user)
-                .then(res => {
+            axios
+                .post(process.env.VUE_APP_API_URL + "/user", this.user)
+                .then((res) => {
                     alert("회원가입 되었습니다. 가입하신 계정으로 로그인 해주세요.");
                     this.user.email = "";
                     this.user.password = "";
                 })
-                .catch(e => {
+                .catch((e) => {
                     alert(e.response.data.defaultMessage);
-                })
+                });
         },
         login() {
-            axios.post(process.env.VUE_APP_API_URL + "/login", this.user)
-                .then(res => {
+            axios
+                .post(process.env.VUE_APP_API_URL + "/login", this.user)
+                .then((res) => {
                     alert("로그인 성공!");
                     const token = res.data;
-                    this.userStore.login({token, email: this.user.email});
+                    this.userStore.login({ token, email: this.user.email });
 
                     this.user.email = "";
                     this.user.password = "";
                 })
-                .catch(e => {
-                    alert(e.response.data.defaultMessage ?? e.response.data)
-                })
+                .catch((e) => {
+                    alert(e.response.data.defaultMessage ?? e.response.data);
+                });
         },
     },
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
-  margin: 40px 0 0;
+    margin: 40px 0 0;
 }
 ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+    display: inline-block;
+    margin: 0 10px;
 }
 a {
-  color: #42b983;
+    color: #42b983;
 }
 </style>
