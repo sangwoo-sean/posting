@@ -55,6 +55,8 @@ export default {
             axios.post(process.env.VUE_APP_API_URL + "/login", this.user)
                 .then(res => {
                     alert("로그인 성공!");
+                    const token = res.data;
+
                     this.user.email = "";
                     this.user.password = "";
                 })

@@ -15,6 +15,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
 
     public String login(UserDto userDto) {
         User user = userRepository.findByEmail(userDto.getEmail())
@@ -24,7 +25,7 @@ public class AuthService {
             throw new InvalidUserPasswordException();
         }
         //todo
-        String jwtToken = "";
+        String jwtToken = jwtProvider.createToken(user);
         return jwtToken;
     }
 }
