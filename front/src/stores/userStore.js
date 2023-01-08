@@ -13,5 +13,9 @@ export const useUserStore = defineStore("userStore", {
             this.token = token;
             this.email = email;
         },
+        logout() {
+            this.token = "";
+            this.email = "";
+        },
     },
 });

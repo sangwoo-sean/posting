@@ -18,6 +18,7 @@
             <div>{{ userStore.email }}</div>
             <div>{{ userStore.token }}</div>
             <button @click="requestSomething">USER 전용 API 호출</button>
+            <button @click="logout">로그아웃</button>
         </div>
     </div>
 </template>
@@ -75,6 +76,14 @@ export default {
                 .then((res) => {
                     console.log(res);
                     alert(res.data);
+                })
+                .catch(console.error);
+        },
+        logout() {
+            axios
+                .post(process.env.VUE_APP_API_URL + "/logout")
+                .then((res) => {
+                    this.userStore.logout();
                 })
                 .catch(console.error);
         },

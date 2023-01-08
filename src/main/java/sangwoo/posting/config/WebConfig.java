@@ -36,6 +36,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .and()
                 .csrf().disable()
                 .cors().and()
+                .formLogin().disable()
+                .logout().disable()
                 .build();
     }
 }
