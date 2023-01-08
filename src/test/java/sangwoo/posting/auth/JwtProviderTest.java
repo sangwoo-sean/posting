@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import sangwoo.posting.user.User;
 import sangwoo.posting.user.dto.UserDto;
 
+import java.time.Duration;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class JwtProviderTest {
@@ -12,7 +14,7 @@ class JwtProviderTest {
     private final JwtProvider jwtProvider;
 
     public JwtProviderTest() {
-        jwtProvider = new JwtProvider("secretKey");
+        jwtProvider = new JwtProvider("secretKey", Duration.ofMillis(2000).toMillis());
     }
 
     @Test
@@ -44,7 +46,11 @@ class JwtProviderTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         //when
         Claims claims = jwtProvider.parseJwtToken(token);
+
+        //then
+        assertThat(claims).isNull();
     }
 }

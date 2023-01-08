@@ -13,6 +13,7 @@
         <button @click="login">로그인</button>
         <div>{{ userStore.email }}</div>
         <div>{{ userStore.token }}</div>
+        <button @click="requestSomething">USER 전용 API 호출</button>
     </div>
 </template>
 
@@ -65,6 +66,15 @@ export default {
                     console.error(e);
                     alert(e.response.data.defaultMessage ?? e.response.data);
                 });
+        },
+        requestSomething() {
+            axios
+                .get(process.env.VUE_APP_API_URL + "/user?email=" + this.userStore.email)
+                .then((res) => {
+                    console.log(res);
+                    alert(res.data);
+                })
+                .catch(console.error);
         },
     },
 };

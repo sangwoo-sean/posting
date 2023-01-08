@@ -1,5 +1,6 @@
 package sangwoo.posting.exceptions;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,21 +11,22 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionAdvice {
 
-    @ExceptionHandler(InvalidUserEmailException.class)
-    public ResponseEntity<String> InvalidUserEmailException(InvalidUserEmailException e) {
-        String message = "유효하지 않은 이메일입니다.";
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<String> ExpiredJwtException(ExpiredJwtException e) {
+        String message = "만료된 토큰입니다.";
         if (e.getMessage() != null) {
             message = e.getMessage();
         }
-        return new ResponseEntity(message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
     }
+
     @ExceptionHandler(InvalidUserPasswordException.class)
     public ResponseEntity<String> InvalidUserPasswordException(InvalidUserPasswordException e) {
         String message = "유효하지 않은 비밀번호입니다.";
         if (e.getMessage() != null) {
             message = e.getMessage();
         }
-        return new ResponseEntity(message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -34,6 +36,6 @@ public class ExceptionAdvice {
         if (e.getMessage() != null) {
             message = e.getMessage();
         }
-        return new ResponseEntity(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

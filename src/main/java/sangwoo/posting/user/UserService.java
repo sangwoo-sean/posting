@@ -33,4 +33,9 @@ public class UserService {
     public void deleteUser() { //회원탈퇴
         //todo: 삭제정책 정의 필요 (soft or hard)
     }
+
+    public UserDto findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(IllegalAccessError::new);
+        return new UserDto(user);
+    }
 }
