@@ -30,4 +30,21 @@ class JwtProviderTest {
         assertThat(claims.getSubject()).isEqualTo("subject");
         assertThat(claims).containsEntry("email", "tester");
     }
+
+    @Test
+    void tokenExpiredTest() {
+        //given
+        UserDto userDto = new UserDto();
+        userDto.setEmail("tester");
+        User user = User.register(userDto);
+        String token = jwtProvider.createToken(user);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        //when
+        Claims claims = jwtProvider.parseJwtToken(token);
+    }
 }

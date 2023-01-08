@@ -20,7 +20,8 @@ public class JwtProvider {
 
     public String createToken(User user) {
         Date now = new Date();
-        Date expiration = new Date(now.getTime() + Duration.ofDays(1).toMillis());
+//        Date expiration = new Date(now.getTime() + Duration.ofDays(1).toMillis());
+        Date expiration = new Date(now.getTime() + Duration.ofMillis(2000).toMillis()); //for test
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE) // (1)
@@ -35,9 +36,17 @@ public class JwtProvider {
     }
 
     public Claims parseJwtToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
-                .parseClaimsJws(token)
-                .getBody();
+        Claims claims = null;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            System.out.println("만료된 토큰입니다.");
+            throw e;
+        }
+
+        return claims;
     }
 }
