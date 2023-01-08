@@ -41,6 +41,10 @@ export default {
             },
         };
     },
+    created() {
+        console.log(this.$isEmpty(""));
+        console.log(this.$isEmpty("?"));
+    },
     methods: {
         registerUser() {
             axios
