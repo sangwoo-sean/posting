@@ -12,16 +12,23 @@
       </div>
       <button @click="registerUser">회원가입</button>
       <button @click="login">로그인</button>
+      <div>{{userStore.email}}</div>
+      <div>{{userStore.token}}</div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import {useUserStore} from "@/stores/userStore";
 
 export default {
     name: 'HelloWorld',
     props: {
         msg: String
+    },
+    setup() {
+        const userStore = useUserStore();
+        return { userStore }
     },
     data() {
         return {
@@ -56,6 +63,7 @@ export default {
                 .then(res => {
                     alert("로그인 성공!");
                     const token = res.data;
+                    this.userStore.login({token, email: this.user.email});
 
                     this.user.email = "";
                     this.user.password = "";
