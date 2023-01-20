@@ -20,7 +20,7 @@ public class UserDto {
     private String email;
 
     @NotBlank(message = "비밀번호는 공백일 수 없습니다.")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$",
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d~!@#$%^&*()_+<>?'\";:]{8,20}$",
             message = "비밀번호는 숫자와 영문을 포함하여 8자 이상 20자 이하여야 합니다.")
     private String password;
 
