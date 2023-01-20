@@ -2,7 +2,10 @@ import axios from "axios";
 import { useUserStore } from "@/stores/userStore";
 
 function hasInvalidToken(error) {
-    return error.response.status === 401;
+    return error.response && error.response.status === 401;
+}
+function serverNetworkError(error) {
+    return error.code === "ERR_NETWORK";
 }
 
 export default function AxiosInterceptor() {
@@ -25,6 +28,9 @@ export default function AxiosInterceptor() {
             if (hasInvalidToken(error)) {
                 alert("토큰이 없거나 만료되었습니다.");
                 window.location.reload();
+            }
+            if (serverNetworkError(error)) {
+                alert("서버와 통신할 수 없습니다.");
             }
             return Promise.reject(error);
         }
