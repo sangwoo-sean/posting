@@ -14,12 +14,22 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * 중복된 이메일이 이미 존재하면 false 반환.
+     * @param userDto
+     * @return boolean - 회원가입 성공 여부를 반환
+     */
     @Transactional
-    public void createUser(UserDto userDto) { //회원가입
+    public boolean createUser(UserDto userDto) { //회원가입
+        boolean duplicated = userRepository.findByEmail(userDto.getEmail()).isPresent();
+        if (duplicated)
+            return false;
+
         String encodedPassword = passwordEncoder.encode(userDto.getPassword());
         userDto.setPassword(encodedPassword);
         User user = User.register(userDto);
         userRepository.save(user);
+        return true;
     }
 
     @Transactional

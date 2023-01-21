@@ -29,10 +29,49 @@ class AuthControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private static final String validEmail = "tester@test1.test";
+    private static final String invalidEmail = "tester";
+    private static final String validPassword = "test1234";
+    private static final String invalidPassword = "test";
+
     @Test
-    void withoutPayload() throws Exception {
+    void withoutEmailAndPassword() throws Exception {
         //given
         UserDto userDto = new UserDto();
+
+        //when
+        ResultActions actions = mockMvc.perform(requestBuilder("/signup")
+                .content(userDto.toString()));
+
+        //then
+        String contentAsString = actions
+                .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    void withValidEmailWithoutPassword() throws Exception {
+        //given
+        UserDto userDto = new UserDto();
+        userDto.setEmail(validEmail);
+
+        //when
+        ResultActions actions = mockMvc.perform(requestBuilder("/signup")
+                .content(userDto.toString()));
+
+        //then
+        String contentAsString = actions
+                .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
+                .andReturn().getResponse().getContentAsString();
+
+        assertThat(contentAsString).contains("userDto.password"); //패스워드 없음 오류
+    }
+
+    @Test
+    void withoutEmailWithValidPassword() throws Exception {
+        //given
+        UserDto userDto = new UserDto();
+        userDto.setPassword(validPassword);
 
         //when
         ResultActions actions = mockMvc.perform(requestBuilder("/signup")
@@ -47,10 +86,11 @@ class AuthControllerTest {
     }
 
     @Test
-    void withoutPassword() throws Exception {
+    void withInvalidEmailAndInvalidPassword() throws Exception {
         //given
         UserDto userDto = new UserDto();
-        userDto.setEmail("tester@test1.test");
+        userDto.setEmail(invalidEmail);
+        userDto.setPassword(invalidPassword);
 
         //when
         ResultActions actions = mockMvc.perform(requestBuilder("/signup")
@@ -61,29 +101,85 @@ class AuthControllerTest {
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(contentAsString).contains("userDto.password"); //패스워드 없음 오류
+        assertThat(contentAsString).contains("userDto.email");
     }
 
-    //todo: test
-    // 패스워드 있고 아이디 없을때
-    // 유효하지 않은 아이디일때
-    // 유효하지 않은 비밀번호일때
-    // 중복된 아이디일때
-
     @Test
-    void successfulSignup() throws Exception {
+    void withValidEmailAndInvalidPassword() throws Exception {
         //given
         UserDto userDto = new UserDto();
-        userDto.setEmail("tester@test1.test");
-        userDto.setPassword("test1234");
+        userDto.setEmail(validEmail);
+        userDto.setPassword(invalidPassword);
 
         //when
         ResultActions actions = mockMvc.perform(requestBuilder("/signup")
                 .content(userDto.toString()));
 
         //then
-        actions
-                .andExpect(status().isOk());
+        String contentAsString = actions
+                .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
+                .andReturn().getResponse().getContentAsString();
+
+        assertThat(contentAsString).contains("userDto.password");
+    }
+
+    @Test
+    void withInvalidEmailAndValidPassword() throws Exception {
+        //given
+        UserDto userDto = new UserDto();
+        userDto.setEmail(invalidEmail);
+        userDto.setPassword(validPassword);
+
+        //when
+        ResultActions actions = mockMvc.perform(requestBuilder("/signup")
+                .content(userDto.toString()));
+
+        //then
+        String contentAsString = actions
+                .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
+                .andReturn().getResponse().getContentAsString();
+
+        assertThat(contentAsString).contains("userDto.email");
+    }
+
+    @Test
+    void signupRequestWithDuplicatedEmail() throws Exception {
+        //given
+        UserDto userDto = new UserDto();
+        userDto.setEmail(validEmail);
+        userDto.setPassword(validPassword);
+        mockMvc.perform(requestBuilder("/signup")
+                .content(userDto.toString()));
+
+        //when
+        ResultActions actions = mockMvc.perform(requestBuilder("/signup")
+                .content(userDto.toString()));
+
+        //then
+        String contentAsString = actions
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        assertThat(contentAsString).isEqualTo("false");
+    }
+
+    @Test
+    void successfulSignup() throws Exception {
+        //given
+        UserDto userDto = new UserDto();
+        userDto.setEmail(validEmail);
+        userDto.setPassword(validPassword);
+
+        //when
+        ResultActions actions = mockMvc.perform(requestBuilder("/signup")
+                .content(userDto.toString()));
+
+        //then
+        String contentAsString = actions
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        assertThat(contentAsString).isEqualTo("true");
     }
 
     private MockHttpServletRequestBuilder requestBuilder(String requestUrl) throws Exception {

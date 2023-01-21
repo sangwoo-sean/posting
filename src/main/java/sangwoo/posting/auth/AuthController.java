@@ -34,8 +34,9 @@ public class AuthController {
             return ResponseEntity.badRequest()
                     .body(bindingResult.getFieldError());
         }
-        userService.createUser(userDto);
-        return ResponseEntity.ok(null);
+
+        boolean success = userService.createUser(userDto);
+        return ResponseEntity.ok(success);
     }
 
     @PostMapping("logout")
@@ -43,4 +44,6 @@ public class AuthController {
         //todo: something
         return ResponseEntity.ok(null);
     }
+
+    //todo: 비밀번호 찾기 혹은 초기화, email 로 보내야할듯
 }
