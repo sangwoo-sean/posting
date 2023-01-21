@@ -13,19 +13,19 @@ public class UserController {
     private final UserService userService;
 
     @PatchMapping
-    public ResponseEntity updateUser() { //회원수정
+    public ResponseEntity<Void> updateUser() { //회원수정
         userService.updateUser();
         return ResponseEntity.ok(null);
     }
 
     @DeleteMapping
-    public ResponseEntity deleteUser() { //회원탈퇴
+    public ResponseEntity<Void> deleteUser() { //회원탈퇴
         userService.deleteUser();
         return ResponseEntity.ok(null);
     }
 
     @GetMapping(params = "email")
-    public ResponseEntity findUserByEmail(@RequestParam String email) {
+    public ResponseEntity<UserDto> findUserByEmail(@RequestParam String email) {
         UserDto userDto = userService.findUserByEmail(email);
         return ResponseEntity.ok(userDto);
     }

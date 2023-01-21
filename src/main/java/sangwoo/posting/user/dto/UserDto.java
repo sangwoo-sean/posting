@@ -27,4 +27,12 @@ public class UserDto {
     public UserDto(User user) {
         email = user.getEmail();
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"email\": \"" + email + "\", " +
+                "\"password\": \"" + password + "\"" +
+                "}";
+    }
 }
