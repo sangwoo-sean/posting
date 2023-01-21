@@ -3,7 +3,7 @@ import { defineStore } from "pinia/dist/pinia";
 export const useUserStore = defineStore("userStore", {
     state: () => ({
         token: "",
-        email: "",
+        email: ""
     }),
     actions: {
         setToken(token) {
@@ -16,6 +16,7 @@ export const useUserStore = defineStore("userStore", {
         logout() {
             this.token = "";
             this.email = "";
-        },
+        }
     },
+    persist: true
 });
