@@ -7,9 +7,6 @@ export const useUserStore = defineStore("userStore", {
         userId: ""
     }),
     actions: {
-        setToken(token) {
-            this.token = token;
-        },
         login({ token, email, userId }) {
             this.token = token;
             this.email = email;
