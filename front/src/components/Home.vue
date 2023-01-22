@@ -5,6 +5,10 @@
             <h2>환영합니다</h2>
             <button @click="requestSomething">USER 전용 API 호출</button>
         </div>
+
+        <hr />
+
+        <div></div>
     </div>
 </template>
 

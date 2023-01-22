@@ -28,7 +28,7 @@
                 <router-link to="/write">
                     <img src="@/assets/svg/pencil-square.svg" alt="write" width="20" />
                 </router-link>
-                <button @click="logout">로그아웃</button>
+                <button class="btn" @click="logout">로그아웃</button>
             </div>
         </div>
     </header>

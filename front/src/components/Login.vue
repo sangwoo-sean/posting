@@ -10,8 +10,8 @@
             <input type="password" v-model="user.password" />
         </div>
         <div>
-            <button @click="registerUser">회원가입</button>
-            <button @click="login">로그인</button>
+            <button class="btn" @click="registerUser">회원가입</button>
+            <button class="btn" @click="login">로그인</button>
         </div>
     </div>
 </template>

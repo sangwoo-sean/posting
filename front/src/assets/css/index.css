@@ -45,16 +45,22 @@ h5 {
 
 }
 
-a.btn,
 button {
     background: transparent;
+    border: unset;
+    cursor: pointer;
+    padding: 0;
+}
+
+a.btn,
+button.btn {
     border: 1px solid var(--color-light-grey);
     padding: 0.5rem 2rem;
     border-radius: 8px;
 }
 
 a.btn:hover,
-button:hover {
+button.btn:hover {
     border: 1px solid var(--color-dark-grey);
 }
 
@@ -78,4 +84,9 @@ button:hover {
 
 .flex-col {
     flex-direction: column;
+}
+
+hr {
+    width: 100%;
+    border: 1px solid var(--color-light-grey);
 }
