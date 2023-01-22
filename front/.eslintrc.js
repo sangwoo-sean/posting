@@ -3,7 +3,8 @@ module.exports = {
     parserOptions: {
         parser: "babel-eslint"
     },
+    plugins: ["prettier"],
     rules: {
         indent: ["error", 4]
     }
-}
+};

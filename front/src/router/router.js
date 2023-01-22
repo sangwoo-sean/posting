@@ -1,14 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import HelloWorld from "@/components/HelloWorld";
 import Error from "@/components/Error";
+import Home from "@/components/Home.vue";
+import Login from "@/components/Login.vue";
+import Signup from "@/components/Signup.vue";
 
 const routes = [
-    { path: "/", component: HelloWorld },
-    { path: "/error", component: Error },
+    { path: "/", component: Home },
+    { path: "/login", component: Login },
+    { path: "/signup", component: Signup },
+    { path: "/error", component: Error }
 ];
 
 export default createRouter({
     history: createWebHistory(),
-    routes,
+    routes
 });
