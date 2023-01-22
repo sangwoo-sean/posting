@@ -4,7 +4,7 @@ import Error from "@/components/Error";
 import Home from "@/components/Home.vue";
 import Login from "@/components/Login.vue";
 import Signup from "@/components/Signup.vue";
-import Elements from "@/components/Elements.vue";
+import Elements from "@/components/layout/Elements.vue";
 
 const routes = [
     { path: "/", component: Home },

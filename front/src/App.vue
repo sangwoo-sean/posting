@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import MainLayout from "@/components/MainLayout.vue";
+import MainLayout from "@/components/layout/MainLayout.vue";
 
 export default {
     name: "App",
-    components: { MainLayout },
+    components: { MainLayout }
 };
 </script>
 
