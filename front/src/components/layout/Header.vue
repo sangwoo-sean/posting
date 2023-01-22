@@ -8,9 +8,9 @@
 
         <nav>
             <ul>
-                <li><a href="javascript:void(0)">menu1</a></li>
-                <li><a href="javascript:void(0)">menu2</a></li>
-                <li><a href="javascript:void(0)">menu3</a></li>
+                <li><a href="javascript:void(0)">Articles</a></li>
+                <li><a href="javascript:void(0)">Event</a></li>
+                <li><a href="javascript:void(0)">Notice</a></li>
             </ul>
         </nav>
 
