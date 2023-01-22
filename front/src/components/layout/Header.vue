@@ -20,7 +20,7 @@
             </div>
             <div v-else class="d-flex justify-right align-items-center" style="gap: 2rem">
                 <div>
-                    <a href="javascript:void(0)">{{ userStore.email }}</a>
+                    <router-link to="/mypage">{{ userStore.email }}</router-link>
                 </div>
                 <a href="javascript:void(0)" id="alarm" class="on">
                     <img src="@/assets/svg/bell.svg" alt="bell" width="20" />

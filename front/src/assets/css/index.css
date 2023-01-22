@@ -59,6 +59,8 @@ button.btn {
     border-radius: 8px;
 }
 
+a.btn.btn-dark,
+button.btn.btn-dark,
 a.btn:hover,
 button.btn:hover {
     border: 1px solid var(--color-dark-grey);

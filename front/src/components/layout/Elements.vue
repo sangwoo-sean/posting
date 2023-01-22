@@ -7,9 +7,23 @@
             <a href="javascript:void(0)" class="btn">a.btn</a>
         </div>
         <hr />
-        <h1>cards</h1>
+
+        <h1>form</h1>
+        <hr />
+        <div style="width: 30%">
+            <div class="input-group">
+                <label>title</label>
+                <input type="text" placeholder="placeholder" />
+            </div>
+            <div class="input-group">
+                <label>title</label>
+                <textarea placeholder="placeholder" rows="10"></textarea>
+            </div>
+        </div>
         <hr />
 
+        <h1>cards</h1>
+        <hr />
         <div class="article-card">
             <div class="header">
                 <span>author</span>
