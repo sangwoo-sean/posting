@@ -18,10 +18,16 @@
             <div v-if="!userStore.token">
                 <router-link to="/login" class="btn">로그인</router-link>
             </div>
-            <div v-else class="d-flex justify-right align-items-center">
+            <div v-else class="d-flex justify-right align-items-center" style="gap: 2rem">
                 <div>
                     <a href="javascript:void(0)">{{ userStore.email }}</a>
                 </div>
+                <a href="javascript:void(0)" id="alarm" class="on">
+                    <img src="@/assets/svg/bell.svg" alt="bell" width="20" />
+                </a>
+                <router-link to="/write">
+                    <img src="@/assets/svg/pencil-square.svg" alt="write" width="20" />
+                </router-link>
                 <button @click="logout">로그아웃</button>
             </div>
         </div>
