@@ -1,15 +1,15 @@
 <template>
-    <div class="d-flex-center flex-col">
+    <div class="d-flex-center flex-col w50 m-auto">
         <h2>로그인</h2>
-        <div>
-            <label>메일</label>
+        <div class="input-group">
+            <label>이메일</label>
             <input type="email" v-model="user.email" />
         </div>
-        <div>
+        <div class="input-group">
             <label>비밀번호</label>
             <input type="password" v-model="user.password" />
         </div>
-        <div>
+        <div class="btn-wrapper">
             <button class="btn" @click="registerUser">회원가입</button>
             <button class="btn" @click="login">로그인</button>
         </div>

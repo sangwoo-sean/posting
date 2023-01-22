@@ -10,7 +10,7 @@
         </div>
 
         <div class="d-flex justify-right">
-            <button class="btn btn-dark" @click="registerArticle">출간</button>
+            <button class="btn btn-dark-border" @click="registerArticle">출간</button>
         </div>
     </div>
 </template>
@@ -73,6 +73,12 @@ export default {
 </script>
 
 <style scoped>
+.title input,
+.content textarea {
+    border: none;
+    padding: 1rem 0;
+}
+
 .title input {
     font-size: 3rem;
 }

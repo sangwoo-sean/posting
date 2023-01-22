@@ -3,8 +3,19 @@
         <h1>buttons</h1>
         <hr />
         <div>
-            <button class="btn">button</button>
-            <a href="javascript:void(0)" class="btn">a.btn</a>
+            <div class="btn-wrapper">
+                <button class="btn">button1</button>
+                <button class="btn">button2</button>
+                <button class="btn">button3</button>
+            </div>
+            <div class="btn-wrapper">
+                <button class="btn btn-dark-border">button dark border</button>
+                <a href="javascript:void(0)" class="btn">a.btn</a>
+            </div>
+            <div class="btn-wrapper">
+                <button class="btn btn-dark">button dark</button>
+                <a href="javascript:void(0)" class="btn">a.btn</a>
+            </div>
         </div>
         <hr />
 

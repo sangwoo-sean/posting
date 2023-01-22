@@ -52,18 +52,13 @@ button {
     padding: 0;
 }
 
-a.btn,
-button.btn {
-    border: 1px solid var(--color-light-grey);
-    padding: 0.5rem 2rem;
-    border-radius: 8px;
+textarea {
+    resize: none;
 }
 
-a.btn.btn-dark,
-button.btn.btn-dark,
-a.btn:hover,
-button.btn:hover {
-    border: 1px solid var(--color-dark-grey);
+textarea:focus-visible,
+input:focus-visible {
+    outline: none;
 }
 
 .d-flex {
@@ -91,4 +86,12 @@ button.btn:hover {
 hr {
     width: 100%;
     border: 1px solid var(--color-light-grey);
+}
+
+.w50 {
+    width: 50%;
+}
+
+.m-auto {
+    margin: auto;
 }
