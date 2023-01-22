@@ -1,7 +1,11 @@
+.article-wrapper {
+    width: 30%;
+}
+
 .article-card {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 100%;
     text-align: left;
     padding: 3rem 0;
 }
@@ -17,6 +21,11 @@
 .article-card .main {
     display: flex;
 }
+
+.article-card .detail {
+    flex-grow: 1;
+}
+
 .article-card .image {
     cursor: pointer;
 }

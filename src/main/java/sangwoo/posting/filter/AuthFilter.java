@@ -28,6 +28,7 @@ public class AuthFilter implements Filter {
         allowedUrls.add("/login");
         allowedUrls.add("/logout");
         allowedUrls.add("/signup");
+        allowedUrls.add("/article/list");
     }
 
     @Override

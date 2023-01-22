@@ -4,25 +4,14 @@
             <div class="article-card" v-for="(article, index) in articles" :key="index">
                 <div class="header">
                     <span>author</span>
-                    <span>Jan 22,2023</span>
+                    <span>{{ new Date(article.createdAt).toLocaleDateString("UK") }}</span>
                     <span>popular</span>
                 </div>
                 <div class="main">
-                    <div>
+                    <div class="detail">
                         <div class="body">
-                            <h2>Lorem ipsum dolor sit amet.</h2>
-                            <span class="content"
-                                >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur facere, possimus.
-                                Accusamus consequuntur corporis debitis dicta earum eveniet molestiae numquam provident
-                                quisquam tenetur? Architecto dignissimos dolore eligendi incidunt iusto omnis placeat
-                                quo ullam vero. Adipisci culpa doloribus eligendi ipsam iste iure laboriosam, minus quae
-                                quas quibusdam. Consequatur delectus fugit harum ipsa natus omnis praesentium quibusdam
-                                sunt veritatis! Accusamus aliquam amet aperiam aspernatur atque beatae dicta dolor
-                                dolores eligendi est eveniet expedita facere facilis fugit illum, impedit laborum libero
-                                maiores minima necessitatibus, neque odit optio perspiciatis quia quis quos ratione
-                                repellendus sunt temporibus voluptates! Aliquid dolores ex numquam quia repellat
-                                voluptatibus?</span
-                            >
+                            <h2>{{ article.title }}</h2>
+                            <span class="content">{{ article.content }}</span>
                         </div>
                         <div class="footer">
                             <div class="tags">
@@ -71,14 +60,13 @@ export default {
     },
     methods: {
         init() {
-            this.articles = [1, 2, 3, 4, 5, 6, 7, 8];
+            this.findAllArticles();
         },
-        requestSomething() {
+        findAllArticles() {
             axios
-                .get(process.env.VUE_APP_API_URL + "/user?email=" + this.userStore.email)
+                .get(process.env.VUE_APP_API_URL + "/article/list")
                 .then((res) => {
-                    console.log(res);
-                    alert(res.data);
+                    this.articles = res.data;
                 })
                 .catch(console.error);
         }

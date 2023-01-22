@@ -7,6 +7,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import sangwoo.posting.article.dto.ArticleDto;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("article")
@@ -29,5 +31,11 @@ public class ArticleController {
     public ResponseEntity<ArticleDto> findArticle(@PathVariable Long articleId) {
         ArticleDto articleDto = articleService.findById(articleId);
         return ResponseEntity.ok(articleDto);
+    }
+
+    @GetMapping("list")
+    public ResponseEntity<List<ArticleDto>> findAllArticles() {
+        List<ArticleDto> articleList = articleService.findAllArticles();
+        return ResponseEntity.ok(articleList);
     }
 }
