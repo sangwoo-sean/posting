@@ -29,7 +29,7 @@ class ArticleServiceTest {
         userDto.setEmail("tester@tester.com");
         userDto.setPassword("testpw123");
         User user = User.register(userDto);
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
         ArticleDto articleDto = new ArticleDto();
         articleDto.setTitle("test title");
@@ -46,6 +46,7 @@ class ArticleServiceTest {
         assertThat(findArticle.getId()).isEqualTo(savedArticle.getId());
         assertThat(findArticle.getTitle()).isEqualTo(articleDto.getTitle());
         assertThat(findArticle.getContent()).isEqualTo(articleDto.getContent());
+        assertThat(findArticle.getUser().getId()).isEqualTo(savedUser.getId());
     }
 
 }
