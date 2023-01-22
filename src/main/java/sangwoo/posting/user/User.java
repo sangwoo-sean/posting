@@ -23,7 +23,7 @@ public class User {
     private LocalDateTime createdAt;
     private LocalDateTime deletedAt;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Article> articles = new ArrayList<>();
 
     @PrePersist

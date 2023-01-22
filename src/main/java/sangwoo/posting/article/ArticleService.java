@@ -3,6 +3,9 @@ package sangwoo.posting.article;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sangwoo.posting.article.dto.ArticleDto;
+import sangwoo.posting.article.dto.ArticleListDto;
+import sangwoo.posting.user.User;
+import sangwoo.posting.user.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,10 +16,14 @@ import java.util.stream.Collectors;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Long createArticle(ArticleDto articleDto) {
-        Article savedArticle = articleRepository.save(Article.create(articleDto));
+        User author = userRepository.findById(articleDto.getUserId())
+                .orElseThrow(IllegalArgumentException::new);
+
+        Article savedArticle = articleRepository.save(Article.create(articleDto, author));
         return savedArticle.getId();
     }
 
@@ -26,9 +33,9 @@ public class ArticleService {
         return new ArticleDto(article);
     }
 
-    public List<ArticleDto> findAllArticles() {
+    public List<ArticleListDto> findAllArticles() {
         return articleRepository.findAllByDeletedAt(null).stream()
-                .map(ArticleDto::new)
+                .map(ArticleListDto::new)
                 .collect(Collectors.toList());
     }
 }

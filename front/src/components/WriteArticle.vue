@@ -17,9 +17,14 @@
 
 <script>
 import axios from "axios";
+import { useUserStore } from "@/stores/userStore";
 
 export default {
     name: "WriteArticle",
+    setup() {
+        const userStore = useUserStore();
+        return { userStore };
+    },
     data() {
         return {
             title: "",
@@ -30,7 +35,7 @@ export default {
         registerArticle() {
             if (!this.validate()) return;
 
-            const params = { title: this.title, content: this.content };
+            const params = { title: this.title, content: this.content, userId: this.userStore.userId };
             axios
                 .post(process.env.VUE_APP_API_URL + "/article", params)
                 .then((res) => {

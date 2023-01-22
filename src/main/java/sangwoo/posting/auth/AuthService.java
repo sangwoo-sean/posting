@@ -3,6 +3,7 @@ package sangwoo.posting.auth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sangwoo.posting.auth.dto.LoginResponseDto;
 import sangwoo.posting.exceptions.InvalidUserEmailException;
 import sangwoo.posting.exceptions.InvalidUserPasswordException;
 import sangwoo.posting.user.User;
@@ -17,15 +18,16 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
-    public String login(UserDto userDto) {
+    public LoginResponseDto login(UserDto userDto) {
         User user = userRepository.findByEmail(userDto.getEmail())
                 .orElseThrow(InvalidUserEmailException::new);
 
         if (!passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
             throw new InvalidUserPasswordException();
         }
-        //todo
+
         String jwtToken = jwtProvider.createToken(user);
-        return jwtToken;
+
+        return new LoginResponseDto(jwtToken, user.getId());
     }
 }

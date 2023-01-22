@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import sangwoo.posting.article.dto.ArticleDto;
+import sangwoo.posting.article.dto.ArticleListDto;
 
 import java.util.List;
 
@@ -34,8 +35,8 @@ public class ArticleController {
     }
 
     @GetMapping("list")
-    public ResponseEntity<List<ArticleDto>> findAllArticles() {
-        List<ArticleDto> articleList = articleService.findAllArticles();
+    public ResponseEntity<List<ArticleListDto>> findAllArticles() {
+        List<ArticleListDto> articleList = articleService.findAllArticles();
         return ResponseEntity.ok(articleList);
     }
 }

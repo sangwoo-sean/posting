@@ -22,7 +22,7 @@ class ArticleServiceTest {
         ArticleDto articleDto = new ArticleDto();
         articleDto.setTitle("test title");
         articleDto.setContent("test content");
-        Article article = Article.create(articleDto);
+        Article article = Article.create(articleDto, author);
 
         //when
         Article savedArticle = articleRepository.save(article);

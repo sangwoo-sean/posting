@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import sangwoo.posting.auth.dto.LoginResponseDto;
 import sangwoo.posting.user.UserService;
 import sangwoo.posting.user.dto.UserDto;
 
@@ -26,8 +27,9 @@ public class AuthController {
                     .body(bindingResult.getFieldError());
         }
 
-        String token = authService.login(userDto);
-        return ResponseEntity.ok(token);
+        LoginResponseDto response = authService.login(userDto);
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("signup")

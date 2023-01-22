@@ -52,11 +52,8 @@ export default {
             axios
                 .post(process.env.VUE_APP_API_URL + "/login", this.user)
                 .then((res) => {
-                    const token = res.data;
-                    this.userStore.login({ token, email: this.user.email });
-
-                    this.user.email = "";
-                    this.user.password = "";
+                    const { token, userId } = res.data;
+                    this.userStore.login({ token, userId, email: this.user.email });
                     this.$router.push("/");
                 })
                 .catch((e) => {
