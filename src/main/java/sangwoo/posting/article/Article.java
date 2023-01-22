@@ -2,6 +2,7 @@ package sangwoo.posting.article;
 
 import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import sangwoo.posting.article.dto.ArticleDto;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@DynamicInsert
 public class Article {
 
     @Id

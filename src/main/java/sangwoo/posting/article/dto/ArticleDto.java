@@ -1,7 +1,9 @@
 package sangwoo.posting.article.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sangwoo.posting.article.Article;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -9,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ArticleDto {
 
     private Long id;
@@ -24,4 +27,11 @@ public class ArticleDto {
     private Long viewCount;
 
     private LocalDateTime createdAt;
+
+    public ArticleDto(Article article) {
+        this.title = article.getTitle();
+        this.content = article.getContent();
+        this.viewCount = article.getViewCount();
+        this.createdAt = article.getCreatedAt();
+    }
 }

@@ -17,4 +17,10 @@ public class ArticleService {
         Article savedArticle = articleRepository.save(Article.create(articleDto));
         return savedArticle.getId();
     }
+
+    public ArticleDto findById(Long articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(IllegalArgumentException::new);
+        return new ArticleDto(article);
+    }
 }
