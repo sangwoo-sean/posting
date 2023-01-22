@@ -3,7 +3,6 @@ package sangwoo.posting.article.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import sangwoo.posting.article.Article;
 
 import java.time.LocalDateTime;
 
@@ -19,11 +18,11 @@ public class ArticleListDto {
     private LocalDateTime createdAt;
     private String author;
 
-    public ArticleListDto(Article article) {
-        this.title = article.getTitle();
-        this.content = article.getContent();
-        this.viewCount = article.getViewCount();
-        this.createdAt = article.getCreatedAt();
-        this.author = article.getUser().getEmail();
+    public ArticleListDto(String title, String content, Long viewCount, LocalDateTime createdAt, String author) {
+        this.title = title;
+        this.content = content;
+        this.viewCount = viewCount;
+        this.createdAt = createdAt;
+        this.author = author;
     }
 }

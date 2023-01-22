@@ -3,7 +3,7 @@
         <div class="article-wrapper d-flex-center flex-col">
             <div class="article-card" v-for="(article, index) in articles" :key="index">
                 <div class="header">
-                    <span>author</span>
+                    <span>{{ article.author }}</span>
                     <span>{{ new Date(article.createdAt).toLocaleDateString("UK") }}</span>
                     <span>popular</span>
                 </div>

@@ -9,7 +9,6 @@ import sangwoo.posting.user.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +33,6 @@ public class ArticleService {
     }
 
     public List<ArticleListDto> findAllArticles() {
-        return articleRepository.findAllByDeletedAt(null).stream()
-                .map(ArticleListDto::new)
-                .collect(Collectors.toList());
+        return articleRepository.findAllReadableArticles();
     }
 }
