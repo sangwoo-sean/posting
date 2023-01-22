@@ -21,11 +21,12 @@ public class AuthFilter implements Filter {
 
     private final JwtProvider jwtProvider;
 
-    private List<String> allowedUrls = new ArrayList<>();
+    private final List<String> allowedUrls = new ArrayList<>();
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         allowedUrls.add("/login");
+        allowedUrls.add("/logout");
         allowedUrls.add("/signup");
     }
 
