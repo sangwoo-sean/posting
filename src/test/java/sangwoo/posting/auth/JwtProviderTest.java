@@ -2,6 +2,7 @@ package sangwoo.posting.auth;
 
 import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.Test;
+import sangwoo.posting.auth.dto.SignupDto;
 import sangwoo.posting.user.User;
 import sangwoo.posting.user.dto.UserDto;
 
@@ -20,9 +21,9 @@ class JwtProviderTest {
     @Test
     void tokenCreateAndParseTest() {
         //given
-        UserDto userDto = new UserDto();
-        userDto.setEmail("tester");
-        User user = User.register(userDto);
+        SignupDto signupDto = new SignupDto();
+        signupDto.setEmail("tester");
+        User user = User.register(signupDto);
         String token = jwtProvider.createToken(user);
 
         //when
@@ -36,9 +37,9 @@ class JwtProviderTest {
     @Test
     void tokenExpiredTest() {
         //given
-        UserDto userDto = new UserDto();
-        userDto.setEmail("tester");
-        User user = User.register(userDto);
+        SignupDto signupDto = new SignupDto();
+        signupDto.setEmail("tester");
+        User user = User.register(signupDto);
         String token = jwtProvider.createToken(user);
 
         try {

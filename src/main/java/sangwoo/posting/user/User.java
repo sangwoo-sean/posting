@@ -2,7 +2,7 @@ package sangwoo.posting.user;
 
 import lombok.Getter;
 import sangwoo.posting.article.Article;
-import sangwoo.posting.user.dto.UserDto;
+import sangwoo.posting.auth.dto.SignupDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,10 +31,11 @@ public class User {
         createdAt = LocalDateTime.now();
     }
 
-    public static User register(UserDto userDto) {
+    public static User register(SignupDto signupDto) {
         User user = new User();
-        user.email = userDto.getEmail();
-        user.password = userDto.getPassword();
+        user.name = signupDto.getName();
+        user.email = signupDto.getEmail();
+        user.password = signupDto.getPassword();
         return user;
     }
 

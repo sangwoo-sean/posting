@@ -1,7 +1,8 @@
 <template>
     <div>
         <h1>This is My Page</h1>
-        <h1>{{ userStore.email }}</h1>
+        <h1>name: {{ userStore.name }}</h1>
+        <h1>email: {{ userStore.email }}</h1>
         <div>내가 쓴 글</div>
         <div>북마크한 글</div>
         <div>포인트</div>

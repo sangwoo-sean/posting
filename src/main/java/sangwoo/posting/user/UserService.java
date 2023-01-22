@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sangwoo.posting.auth.dto.SignupDto;
 import sangwoo.posting.user.dto.UserDto;
 
 @Service
@@ -16,18 +17,18 @@ public class UserService {
 
     /**
      * 중복된 이메일이 이미 존재하면 false 반환.
-     * @param userDto
+     * @param signupDto
      * @return boolean - 회원가입 성공 여부를 반환
      */
     @Transactional
-    public boolean createUser(UserDto userDto) { //회원가입
-        boolean duplicated = userRepository.findByEmail(userDto.getEmail()).isPresent();
+    public boolean createUser(SignupDto signupDto) { //회원가입
+        boolean duplicated = userRepository.findByEmail(signupDto.getEmail()).isPresent();
         if (duplicated)
             return false;
 
-        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-        userDto.setPassword(encodedPassword);
-        User user = User.register(userDto);
+        String encodedPassword = passwordEncoder.encode(signupDto.getPassword());
+        signupDto.setPassword(encodedPassword);
+        User user = User.register(signupDto);
         userRepository.save(user);
         return true;
     }

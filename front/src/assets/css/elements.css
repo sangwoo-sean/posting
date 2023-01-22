@@ -82,7 +82,8 @@
     font-size: 1.2rem;
 }
 
-.input-group:not(:last-of-type) {
+.input-group {
+    width: 100%;
     margin-bottom: 2rem;
 }
 

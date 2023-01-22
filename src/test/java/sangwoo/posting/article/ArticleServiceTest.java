@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sangwoo.posting.article.dto.ArticleDto;
+import sangwoo.posting.auth.dto.SignupDto;
 import sangwoo.posting.user.User;
 import sangwoo.posting.user.UserRepository;
 import sangwoo.posting.user.dto.UserDto;
@@ -25,10 +26,10 @@ class ArticleServiceTest {
     @Test
     void createArticleTest() {
         //given
-        UserDto userDto = new UserDto();
-        userDto.setEmail("tester@tester.com");
-        userDto.setPassword("testpw123");
-        User user = User.register(userDto);
+        SignupDto signupDto = new SignupDto();
+        signupDto.setEmail("tester@tester.com");
+        signupDto.setPassword("testpw123");
+        User user = User.register(signupDto);
         User savedUser = userRepository.save(user);
 
         ArticleDto articleDto = new ArticleDto();

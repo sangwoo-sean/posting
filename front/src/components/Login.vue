@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex-center flex-col w50 m-auto">
+    <div class="d-flex-center flex-col w20 m-auto">
         <h2>로그인</h2>
         <div class="input-group">
             <label>이메일</label>
@@ -35,25 +35,12 @@ export default {
         };
     },
     methods: {
-        registerUser() {
-            axios
-                .post(process.env.VUE_APP_API_URL + "/user", this.user)
-                .then((res) => {
-                    alert("회원가입 되었습니다. 가입하신 계정으로 로그인 해주세요.");
-                    this.user.email = "";
-                    this.user.password = "";
-                    this.$router.push("/login");
-                })
-                .catch((e) => {
-                    alert(e.response.data.defaultMessage);
-                });
-        },
         login() {
             axios
                 .post(process.env.VUE_APP_API_URL + "/login", this.user)
                 .then((res) => {
-                    const { token, userId } = res.data;
-                    this.userStore.login({ token, userId, email: this.user.email });
+                    const { token, userId, name } = res.data;
+                    this.userStore.login({ token, userId, name, email: this.user.email });
                     this.$router.push("/");
                 })
                 .catch((e) => {

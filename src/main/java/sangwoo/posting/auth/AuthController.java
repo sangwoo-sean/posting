@@ -7,9 +7,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import sangwoo.posting.auth.dto.LoginDto;
 import sangwoo.posting.auth.dto.LoginResponseDto;
+import sangwoo.posting.auth.dto.SignupDto;
 import sangwoo.posting.user.UserService;
-import sangwoo.posting.user.dto.UserDto;
 
 import javax.transaction.Transactional;
 
@@ -21,26 +22,26 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("login")
-    public ResponseEntity login(@Validated @RequestBody UserDto userDto, BindingResult bindingResult) {
+    public ResponseEntity login(@Validated @RequestBody LoginDto loginDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest()
                     .body(bindingResult.getFieldError());
         }
 
-        LoginResponseDto response = authService.login(userDto);
+        LoginResponseDto response = authService.login(loginDto);
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("signup")
     @Transactional
-    public ResponseEntity signup(@Validated @RequestBody UserDto userDto, BindingResult bindingResult) { //회원가입
+    public ResponseEntity signup(@Validated @RequestBody SignupDto signupDto, BindingResult bindingResult) { //회원가입
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest()
                     .body(bindingResult.getFieldError());
         }
 
-        boolean success = userService.createUser(userDto);
+        boolean success = userService.createUser(signupDto);
         return ResponseEntity.ok(success);
     }
 

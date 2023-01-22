@@ -20,7 +20,7 @@
             </div>
             <div v-else class="d-flex justify-right align-items-center" style="gap: 2rem">
                 <div>
-                    <router-link to="/mypage">{{ userStore.email }}</router-link>
+                    <router-link to="/mypage">{{ userStore.name }}</router-link>
                 </div>
                 <a href="javascript:void(0)" id="alarm" class="on">
                     <img src="@/assets/svg/bell.svg" alt="bell" width="20" />
@@ -46,6 +46,8 @@ export default {
     },
     methods: {
         logout() {
+            if (!confirm("로그아웃 하시겠습니까?")) return;
+
             axios
                 .post(process.env.VUE_APP_API_URL + "/logout")
                 .then((res) => {
