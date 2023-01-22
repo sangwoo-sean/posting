@@ -86,6 +86,24 @@
     margin-bottom: 2rem;
 }
 
+.input-group span.info,
+.input-group span.warn,
+.input-group span.error {
+    font-size: 0.75rem;
+}
+
+.input-group span.info {
+    color: #008cff;
+}
+
+.input-group span.warn {
+    color: #f3a600;
+}
+
+.input-group span.error {
+    color: #ff0000;
+}
+
 .btn-wrapper {
     display: flex;
     gap: 1rem;

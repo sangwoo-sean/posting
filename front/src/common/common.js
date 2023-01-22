@@ -1,5 +1,3 @@
-/* eslint-disable */
-// prettier-ignore
 export default {
     install(Vue) {
         Vue.config.globalProperties.$autoDashPhoneNumber = function (str) {
@@ -86,5 +84,5 @@ export default {
                 (typeof value === "object" && !Object.keys(value).length)
             );
         };
-    },
+    }
 };
