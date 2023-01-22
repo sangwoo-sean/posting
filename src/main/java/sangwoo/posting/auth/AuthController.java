@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import sangwoo.posting.user.UserService;
 import sangwoo.posting.user.dto.UserDto;
 
+import javax.transaction.Transactional;
+
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
@@ -29,6 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("signup")
+    @Transactional
     public ResponseEntity signup(@Validated @RequestBody UserDto userDto, BindingResult bindingResult) { //회원가입
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest()

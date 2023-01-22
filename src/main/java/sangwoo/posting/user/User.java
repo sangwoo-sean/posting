@@ -1,10 +1,13 @@
 package sangwoo.posting.user;
 
 import lombok.Getter;
+import sangwoo.posting.article.Article;
 import sangwoo.posting.user.dto.UserDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -19,6 +22,9 @@ public class User {
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime deletedAt;
+
+    @OneToMany
+    private List<Article> articles = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
