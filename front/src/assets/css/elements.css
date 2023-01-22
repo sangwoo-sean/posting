@@ -23,6 +23,7 @@
 }
 
 .article-card .detail {
+    margin-right: 3rem;
     flex-grow: 1;
 }
 
@@ -31,7 +32,6 @@
 }
 
 .article-card .body {
-    margin-right: 3rem;
     cursor: pointer;
 }
 
