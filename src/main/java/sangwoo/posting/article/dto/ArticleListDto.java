@@ -18,7 +18,8 @@ public class ArticleListDto {
     private LocalDateTime createdAt;
     private String author;
 
-    public ArticleListDto(String title, String content, Long viewCount, LocalDateTime createdAt, String author) {
+    public ArticleListDto(Long id, String title, String content, Long viewCount, LocalDateTime createdAt, String author) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.viewCount = viewCount;

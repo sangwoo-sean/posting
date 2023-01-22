@@ -4,15 +4,15 @@
             <div class="article-card" v-for="(article, index) in articles" :key="index">
                 <div class="header">
                     <span>{{ article.author }}</span>
-                    <span>{{ new Date(article.createdAt).toLocaleDateString("UK") }}</span>
+                    <span>{{ new Date(article.createdAt).toLocaleDateString() }}</span>
                     <span>popular</span>
                 </div>
                 <div class="main">
                     <div class="detail">
-                        <div class="body">
+                        <router-link :to="'/article/' + article.id" class="body">
                             <h2>{{ article.title }}</h2>
                             <span class="content">{{ article.content }}</span>
-                        </div>
+                        </router-link>
                         <div class="footer">
                             <div class="tags">
                                 <span class="tag">tag1</span>
@@ -29,9 +29,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="image">
+                    <router-link :to="'/article/' + article.id" class="image">
                         <img src="https://via.placeholder.com/100x100" alt="article" width="100" height="100" />
-                    </div>
+                    </router-link>
                 </div>
             </div>
         </div>
