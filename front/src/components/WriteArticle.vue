@@ -5,6 +5,20 @@
         <div class="input-group title">
             <input type="text" placeholder="제목을 입력하세요" v-model="title" maxlength="100" />
         </div>
+
+        <div class="tags">
+            <span class="tag" v-for="tag in tags"
+                >{{ tag }}<span class="delete-btn" @click="deleteTag(tag)"></span
+            ></span>
+            <input
+                type="text"
+                placeholder="태그를 입력하세요"
+                @keyup.enter="createTag"
+                @keydown.delete="deleteLastTag"
+                maxlength="20"
+            />
+        </div>
+
         <div class="input-group content">
             <textarea placeholder="내용을 입력하세요" rows="10" v-model="content" maxlength="4000"></textarea>
         </div>
@@ -28,7 +42,8 @@ export default {
     data() {
         return {
             title: "",
-            content: ""
+            content: "",
+            tags: []
         };
     },
     methods: {
@@ -67,6 +82,31 @@ export default {
             }
 
             return true;
+        },
+        createTag(e) {
+            const value = e.target.value;
+            if (!value) return;
+
+            if (this.tags.length >= 10) {
+                alert("태그는 10개까지만 추가 가능합니다.");
+                return;
+            }
+
+            if (this.tags.includes(value)) {
+                e.target.value = "";
+                return;
+            }
+
+            this.tags.push(value);
+            e.target.value = "";
+        },
+        deleteLastTag(e) {
+            if (e.target.value) return;
+
+            this.tags.splice(this.tags.length - 1, 1);
+        },
+        deleteTag(targetTag) {
+            this.tags = this.tags.filter((tag) => tag !== targetTag);
         }
     }
 };
@@ -84,5 +124,34 @@ export default {
 }
 .content textarea {
     font-size: 1.5rem;
+}
+
+.tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.tags .tag {
+    background: var(--color-light-grey);
+    border-radius: 20px;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+.tags input {
+    border: none;
+    font-size: 1.2rem;
+    padding: 1rem 0;
+}
+.tags .tag .delete-btn::before {
+    content: "✕";
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+}
+.tags .tag .delete-btn::before:hover {
+    font-weight: bold;
 }
 </style>
