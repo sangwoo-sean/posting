@@ -8,6 +8,7 @@ import sangwoo.posting.article.Article;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,10 +31,13 @@ public class ArticleDto {
 
     private LocalDateTime createdAt;
 
+    private List<String> tags;
+
     public ArticleDto(Article article) {
         this.title = article.getTitle();
         this.content = article.getContent();
         this.viewCount = article.getViewCount();
         this.createdAt = article.getCreatedAt();
+        this.tags = article.getTags();
     }
 }
