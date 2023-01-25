@@ -7,7 +7,7 @@
         </div>
         <div class="input-group">
             <label>비밀번호</label>
-            <input type="password" v-model="user.password" />
+            <input type="password" v-model="user.password" @keyup.enter="login" />
         </div>
         <div class="btn-wrapper">
             <router-link to="/signup" class="btn">회원가입</router-link>
