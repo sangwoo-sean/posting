@@ -27,7 +27,7 @@ export default function AxiosInterceptor() {
         (error) => {
             if (hasInvalidToken(error)) {
                 alert("토큰이 없거나 만료되었습니다.");
-                window.location.reload();
+                window.location.href = "/";
             }
             if (serverNetworkError(error)) {
                 alert("서버와 통신할 수 없습니다.");
