@@ -125,33 +125,4 @@ export default {
 .content textarea {
     font-size: 1.5rem;
 }
-
-.tags {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.tags .tag {
-    background: var(--color-light-grey);
-    border-radius: 20px;
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    position: relative;
-}
-.tags input {
-    border: none;
-    font-size: 1.2rem;
-    padding: 1rem 0;
-}
-.tags .tag .delete-btn::before {
-    content: "✕";
-    position: absolute;
-    right: 10px;
-    bottom: 8px;
-}
-.tags .tag .delete-btn::before:hover {
-    font-weight: bold;
-}
 </style>

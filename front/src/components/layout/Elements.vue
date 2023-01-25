@@ -30,6 +30,19 @@
                 <label>title</label>
                 <textarea placeholder="placeholder" rows="10"></textarea>
             </div>
+
+            <div class="tags">
+                <span class="tag" v-for="tag in tags"
+                    >{{ tag }}<span class="delete-btn" @click="deleteTag(tag)"></span
+                ></span>
+                <input
+                    type="text"
+                    placeholder="태그를 입력하세요"
+                    @keyup.enter="createTag"
+                    @keydown.delete="deleteLastTag"
+                    maxlength="20"
+                />
+            </div>
         </div>
         <hr />
 
@@ -162,7 +175,39 @@
 
 <script>
 export default {
-    name: "Elements"
+    name: "Elements",
+    data() {
+        return {
+            tags: ["lorem", "ipsum"]
+        };
+    },
+    methods: {
+        createTag(e) {
+            const value = e.target.value;
+            if (!value) return;
+
+            if (this.tags.length >= 10) {
+                alert("태그는 10개까지만 추가 가능합니다.");
+                return;
+            }
+
+            if (this.tags.includes(value)) {
+                e.target.value = "";
+                return;
+            }
+
+            this.tags.push(value);
+            e.target.value = "";
+        },
+        deleteLastTag(e) {
+            if (e.target.value) return;
+
+            this.tags.splice(this.tags.length - 1, 1);
+        },
+        deleteTag(targetTag) {
+            this.tags = this.tags.filter((tag) => tag !== targetTag);
+        }
+    }
 };
 </script>
 
