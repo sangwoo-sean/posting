@@ -56,7 +56,7 @@ export default {
                 .catch(console.error)
                 .finally(() => {
                     this.userStore.logout();
-                    this.router.push("/");
+                    this.$router.push("/");
                 });
         }
     }
