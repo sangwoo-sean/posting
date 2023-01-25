@@ -50,7 +50,7 @@ export default {
         registerArticle() {
             if (!this.validate()) return;
 
-            const params = { title: this.title, content: this.content, userId: this.userStore.userId };
+            const params = { title: this.title, content: this.content, userId: this.userStore.userId, tags: this.tags };
             axios
                 .post(process.env.VUE_APP_API_URL + "/article", params)
                 .then((res) => {

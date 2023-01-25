@@ -31,7 +31,8 @@
                 <textarea placeholder="placeholder" rows="10"></textarea>
             </div>
 
-            <div class="tags">
+            <h3>editable</h3>
+            <div class="tags edit">
                 <span class="tag" v-for="tag in tags"
                     >{{ tag }}<span class="delete-btn" @click="deleteTag(tag)"></span
                 ></span>
@@ -42,6 +43,12 @@
                     @keydown.delete="deleteLastTag"
                     maxlength="20"
                 />
+            </div>
+            <h3>읽기전용</h3>
+            <div class="tags">
+                <span class="tag" v-for="tag in tags"
+                    >{{ tag }}<span class="delete-btn" @click="deleteTag(tag)"></span
+                ></span>
             </div>
         </div>
         <hr />

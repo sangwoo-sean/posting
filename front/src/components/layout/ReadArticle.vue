@@ -6,6 +6,10 @@
             <span>출간일: {{ new Date(this.article.createdAt).toLocaleString() }}</span>
         </div>
 
+        <div class="tags">
+            <span class="tag" v-for="tag in article.tags">{{ tag }}</span>
+        </div>
+
         <div class="article-detail">
             <p v-for="line in formatTextareaContent(article.content)" v-html="line"></p>
         </div>
@@ -23,7 +27,8 @@ export default {
                 title: "",
                 content: "",
                 createdAt: "",
-                viewCount: 0
+                viewCount: 0,
+                tags: []
             }
         };
     },
