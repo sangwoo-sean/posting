@@ -6,6 +6,7 @@ import sangwoo.posting.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,4 +27,11 @@ public class Comment {
     @JoinColumn(name = "articleId")
     @ManyToOne(fetch = FetchType.LAZY)
     private Article article;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parentId")
+    private Comment parent;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
+    private List<Comment> children;
 }
