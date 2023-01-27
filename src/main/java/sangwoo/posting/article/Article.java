@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import sangwoo.posting.article.dto.ArticleDto;
+import sangwoo.posting.comment.Comment;
 import sangwoo.posting.config.converter.StringListConverter;
 import sangwoo.posting.user.User;
 
@@ -35,6 +36,9 @@ public class Article {
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
+    private List<Comment> comments;
 
     @PrePersist
     public void prePersist() {
