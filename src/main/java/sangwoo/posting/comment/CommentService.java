@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sangwoo.posting.article.Article;
 import sangwoo.posting.article.ArticleRepository;
-import sangwoo.posting.comment.dto.CommentDto;
+import sangwoo.posting.comment.dto.CommentCreateDto;
 import sangwoo.posting.user.User;
 import sangwoo.posting.user.UserRepository;
 
@@ -18,7 +18,7 @@ public class CommentService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public Long createComment(CommentDto commentDto) {
+    public Long createComment(CommentCreateDto commentDto) {
         User user = userRepository.findById(commentDto.getUserId())
                 .orElseThrow(IllegalArgumentException::new);
 

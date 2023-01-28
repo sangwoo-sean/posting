@@ -4,10 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sangwoo.posting.article.Article;
+import sangwoo.posting.comment.dto.CommentReadDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,7 +33,8 @@ public class ArticleDto {
 
     private LocalDateTime createdAt;
 
-    private List<String> tags;
+    private List<String> tags = new ArrayList<>();
+    private List<CommentReadDto> comments = new ArrayList<>();
 
     public ArticleDto(Article article) {
         this.title = article.getTitle();

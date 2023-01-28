@@ -7,7 +7,7 @@ import sangwoo.posting.article.Article;
 import sangwoo.posting.article.ArticleRepository;
 import sangwoo.posting.article.dto.ArticleDto;
 import sangwoo.posting.auth.dto.SignupDto;
-import sangwoo.posting.comment.dto.CommentDto;
+import sangwoo.posting.comment.dto.CommentCreateDto;
 import sangwoo.posting.user.User;
 import sangwoo.posting.user.UserRepository;
 
@@ -36,7 +36,7 @@ class CommentServiceTest {
         Article article = articleRepository.save(Article.create(new ArticleDto(), user));
         String contentTest = "content test";
 
-        CommentDto commentDto = CommentDto.builder()
+        CommentCreateDto commentDto = CommentCreateDto.builder()
                 .content(contentTest)
                 .articleId(article.getId())
                 .userId(user.getId())
@@ -61,13 +61,13 @@ class CommentServiceTest {
         Article article = articleRepository.save(Article.create(new ArticleDto(), user));
         String contentTest = "content test";
 
-        CommentDto parentCommentDto = CommentDto.builder()
+        CommentCreateDto parentCommentDto = CommentCreateDto.builder()
                 .articleId(article.getId())
                 .userId(user.getId())
                 .build();
         Long parentId = commentService.createComment(parentCommentDto);
 
-        CommentDto childCommentDto = CommentDto.builder()
+        CommentCreateDto childCommentDto = CommentCreateDto.builder()
                 .content(contentTest)
                 .articleId(article.getId())
                 .userId(user.getId())

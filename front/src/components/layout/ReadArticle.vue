@@ -14,10 +14,11 @@
             <p v-for="line in $formatTextareaContent(article.content)" v-html="line"></p>
         </div>
 
+        <h4>comments ({{ article.comments.length }})</h4>
         <div class="comment-wrapper">
             <div class="input-area">
                 <textarea rows="3"></textarea>
-                <button class="btn">comment</button>
+                <button class="btn" @click="createComment">comment</button>
             </div>
             <div class="comments">
                 <div class="comment" v-for="(comment, index) in article.comments" :key="index">
@@ -27,17 +28,17 @@
                             <span>{{ comment.createdAt }}</span>
                         </div>
                         <div>
-                            <a href="javascript:void(0)"><span>reply</span></a>
+                            <button @click="comment.open = !comment.open">reply</button>
                         </div>
                     </div>
                     <div class="body">
                         <p v-for="line in $formatTextareaContent(comment.content)" v-html="line"></p>
                     </div>
-                    <div class="input-area">
+                    <div class="input-area" v-show="comment.open">
                         <textarea rows="3"></textarea>
-                        <button class="btn">reply</button>
+                        <button class="btn" @click="createComment($event, comment.id)">reply</button>
                     </div>
-                    <div class="children" v-if="comment.children.length > 0">
+                    <div class="children" v-if="comment.children && comment.children.length > 0">
                         <div class="child" v-for="(child, childIndex) in comment.children" :key="childIndex">
                             <div class="header">
                                 <div>
@@ -58,9 +59,14 @@
 
 <script>
 import axios from "axios";
+import { useUserStore } from "@/stores/userStore";
 
 export default {
     name: "ReadArticle",
+    setup() {
+        const userStore = useUserStore();
+        return { userStore };
+    },
     data() {
         return {
             article: {
@@ -75,48 +81,6 @@ export default {
     },
     created() {
         this.init();
-        this.article.comments = [
-            {
-                author: "작성자",
-                createdAt: "23.1.25",
-                content: "Lorem ipsum dolor sit amet, consectetur.",
-                children: []
-            },
-            {
-                author: "작성자",
-                createdAt: "23.1.25",
-                content: "Lorem ipsum dolor sit amet, consectetur.",
-                children: [
-                    {
-                        author: "작성자",
-                        createdAt: "23.1.25",
-                        content: "Lorem ipsum dolor sit amet, consectetur."
-                    },
-                    {
-                        author: "작성자",
-                        createdAt: "23.1.25",
-                        content: "Lorem ipsum dolor sit amet, consectetur."
-                    }
-                ]
-            },
-            {
-                author: "작성자",
-                createdAt: "23.1.25",
-                content: "Lorem ipsum dolor sit amet, consectetur.",
-                children: [
-                    {
-                        author: "작성자",
-                        createdAt: "23.1.25",
-                        content: "Lorem ipsum dolor sit amet, consectetur."
-                    },
-                    {
-                        author: "작성자",
-                        createdAt: "23.1.25",
-                        content: "Lorem ipsum dolor sit amet, consectetur."
-                    }
-                ]
-            }
-        ];
     },
     methods: {
         init() {
@@ -125,8 +89,42 @@ export default {
                 .get(process.env.VUE_APP_API_URL + "/article/" + articleId)
                 .then((res) => {
                     Object.assign(this.article, res.data);
+                    this.article.comments.forEach(
+                        (comment) => (comment.createdAt = new Date(comment.createdAt).toLocaleString())
+                    );
+                    this.reArrangeComments();
                 })
                 .catch(console.error);
+        },
+        createComment(e, parentId) {
+            const content = e.target.previousSibling.value;
+            if (!content || !content.trim().length) return;
+
+            const params = {
+                content,
+                userId: this.userStore.userId,
+                articleId: Number(this.$route.params.articleId)
+            };
+
+            if (parentId) {
+                params.parentId = parentId;
+            }
+
+            axios
+                .post(process.env.VUE_APP_API_URL + "/comment", params)
+                .then((res) => {
+                    console.log(res);
+                    e.target.previousSibling.value = "";
+                    this.init();
+                })
+                .catch(console.error);
+        },
+        reArrangeComments() {
+            const parents = this.article.comments.filter((comment) => !comment.parentId);
+            parents.forEach((parent) => {
+                parent.children = this.article.comments.filter((comment) => comment.parentId === parent.id);
+            });
+            this.article.comments = parents;
         }
     }
 };

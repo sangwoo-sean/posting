@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sangwoo.posting.comment.dto.CommentDto;
+import sangwoo.posting.comment.dto.CommentCreateDto;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,7 +16,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    public ResponseEntity createComment(@ModelAttribute @Validated CommentDto commentDto) {
+    public ResponseEntity<Void> createComment(@RequestBody @Validated CommentCreateDto commentDto) {
         commentService.createComment(commentDto);
         return ResponseEntity.ok(null);
     }

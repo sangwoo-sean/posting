@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sangwoo.posting.article.dto.ArticleDto;
 import sangwoo.posting.article.dto.ArticleListDto;
+import sangwoo.posting.comment.CommentRepository;
+import sangwoo.posting.comment.dto.CommentReadDto;
 import sangwoo.posting.user.User;
 import sangwoo.posting.user.UserRepository;
 
@@ -16,6 +18,7 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public Long createArticle(ArticleDto articleDto) {
@@ -29,7 +32,12 @@ public class ArticleService {
     public ArticleDto findById(Long articleId) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(IllegalArgumentException::new);
-        return new ArticleDto(article);
+
+        List<CommentReadDto> collect = commentRepository.findAllReadDtoByArticleId(article.getId());
+
+        ArticleDto articleDto = new ArticleDto(article);
+        articleDto.setComments(collect);
+        return articleDto;
     }
 
     public List<ArticleListDto> findAllArticles() {

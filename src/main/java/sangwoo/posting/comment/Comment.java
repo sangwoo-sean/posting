@@ -3,7 +3,7 @@ package sangwoo.posting.comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sangwoo.posting.article.Article;
-import sangwoo.posting.comment.dto.CommentDto;
+import sangwoo.posting.comment.dto.CommentCreateDto;
 import sangwoo.posting.user.User;
 
 import javax.persistence.*;
@@ -39,7 +39,7 @@ public class Comment {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
     private List<Comment> children = new ArrayList<>();
 
-    public static Comment create(CommentDto commentDto, User user, Article article, Comment parent) {
+    public static Comment create(CommentCreateDto commentDto, User user, Article article, Comment parent) {
         Comment comment = new Comment();
         comment.content = commentDto.getContent();
         comment.user = user;

@@ -195,6 +195,7 @@ button.btn.btn-dark:hover {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
+    font-weight: bold;
 }
 
 .comment .body {
