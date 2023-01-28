@@ -15,9 +15,7 @@
                         </router-link>
                         <div class="footer">
                             <div class="tags">
-                                <span class="tag">tag1</span>
-                                <span class="tag">tag2</span>
-                                <span class="tag">tag3</span>
+                                <span class="tag" v-for="(tag, index) in article.tags" :key="index">{{ tag }}</span>
                             </div>
                             <div class="icons">
                                 <button>

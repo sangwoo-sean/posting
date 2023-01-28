@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    @Query("select new sangwoo.posting.article.dto.ArticleListDto(a.id, a.title, a.content, a.viewCount, a.createdAt, u.email)" +
+    @Query("select new sangwoo.posting.article.dto.ArticleListDto(a.id, a.title, a.content, a.viewCount, a.createdAt, u.email, a.tags)" +
             " from Article a" +
             " join a.user u on u.id=a.user.id" +
             " where a.deletedAt = null" +
