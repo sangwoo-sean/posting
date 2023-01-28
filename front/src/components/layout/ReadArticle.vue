@@ -11,7 +11,7 @@
         </div>
 
         <div class="article-detail">
-            <p v-for="line in formatTextareaContent(article.content)" v-html="line"></p>
+            <p v-for="line in $formatTextareaContent(article.content)" v-html="line"></p>
         </div>
 
         <div class="comment-wrapper">
@@ -20,126 +20,33 @@
                 <button class="btn">comment</button>
             </div>
             <div class="comments">
-                <div class="comment">
+                <div class="comment" v-for="(comment, index) in article.comments" :key="index">
                     <div class="header">
                         <div>
-                            <span class="author">작성자</span>
-                            <span>23.1.25</span>
+                            <span class="author">{{ comment.author }}</span>
+                            <span>{{ comment.createdAt }}</span>
                         </div>
                         <div>
                             <a href="javascript:void(0)"><span>reply</span></a>
                         </div>
                     </div>
                     <div class="body">
-                        <p>comment</p>
-                        <p>comment</p>
-                        <p>comment</p>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="header">
-                        <div>
-                            <span class="author">작성자</span>
-                            <span>23.1.25</span>
-                        </div>
-                        <div>
-                            <a href="javascript:void(0)"><span>reply</span></a>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p>comment</p>
-                        <p>comment</p>
-                        <p>comment</p>
+                        <p v-for="line in $formatTextareaContent(comment.content)" v-html="line"></p>
                     </div>
                     <div class="input-area">
                         <textarea rows="3"></textarea>
                         <button class="btn">reply</button>
                     </div>
-                </div>
-                <div class="comment">
-                    <div class="header">
-                        <div>
-                            <span class="author">작성자</span>
-                            <span>23.1.25</span>
-                        </div>
-                        <div>
-                            <a href="javascript:void(0)"><span>reply</span></a>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <span>comment</span>
-                    </div>
-                    <div class="input-area">
-                        <textarea rows="3"></textarea>
-                        <button class="btn">reply</button>
-                    </div>
-                    <div class="children">
-                        <div class="child">
+                    <div class="children" v-if="comment.children.length > 0">
+                        <div class="child" v-for="(child, childIndex) in comment.children" :key="childIndex">
                             <div class="header">
                                 <div>
-                                    <span class="author">작성자</span>
-                                    <span>23.1.25</span>
+                                    <span class="author">{{ child.author }}</span>
+                                    <span>{{ child.createdAt }}</span>
                                 </div>
                             </div>
                             <div class="body">
-                                <p>comment</p>
-                                <p>comment</p>
-                                <p>comment</p>
-                            </div>
-                        </div>
-                        <div class="child">
-                            <div class="header">
-                                <div>
-                                    <span class="author">작성자</span>
-                                    <span>23.1.25</span>
-                                </div>
-                            </div>
-                            <div class="body">
-                                <p>comment</p>
-                                <p>comment</p>
-                                <p>comment</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="header">
-                        <div>
-                            <span class="author">작성자</span>
-                            <span>23.1.25</span>
-                        </div>
-                        <div>
-                            <a href="javascript:void(0)"><span>reply</span></a>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <span>comment</span>
-                    </div>
-                    <div class="children">
-                        <div class="child">
-                            <div class="header">
-                                <div>
-                                    <span class="author">작성자</span>
-                                    <span>23.1.25</span>
-                                </div>
-                            </div>
-                            <div class="body">
-                                <p>comment</p>
-                                <p>comment</p>
-                                <p>comment</p>
-                            </div>
-                        </div>
-                        <div class="child">
-                            <div class="header">
-                                <div>
-                                    <span class="author">작성자</span>
-                                    <span>23.1.25</span>
-                                </div>
-                            </div>
-                            <div class="body">
-                                <p>comment</p>
-                                <p>comment</p>
-                                <p>comment</p>
+                                <p v-for="line in $formatTextareaContent(child.content)" v-html="line"></p>
                             </div>
                         </div>
                     </div>
@@ -161,12 +68,55 @@ export default {
                 content: "",
                 createdAt: "",
                 viewCount: 0,
-                tags: []
+                tags: [],
+                comments: []
             }
         };
     },
     created() {
         this.init();
+        this.article.comments = [
+            {
+                author: "작성자",
+                createdAt: "23.1.25",
+                content: "Lorem ipsum dolor sit amet, consectetur.",
+                children: []
+            },
+            {
+                author: "작성자",
+                createdAt: "23.1.25",
+                content: "Lorem ipsum dolor sit amet, consectetur.",
+                children: [
+                    {
+                        author: "작성자",
+                        createdAt: "23.1.25",
+                        content: "Lorem ipsum dolor sit amet, consectetur."
+                    },
+                    {
+                        author: "작성자",
+                        createdAt: "23.1.25",
+                        content: "Lorem ipsum dolor sit amet, consectetur."
+                    }
+                ]
+            },
+            {
+                author: "작성자",
+                createdAt: "23.1.25",
+                content: "Lorem ipsum dolor sit amet, consectetur.",
+                children: [
+                    {
+                        author: "작성자",
+                        createdAt: "23.1.25",
+                        content: "Lorem ipsum dolor sit amet, consectetur."
+                    },
+                    {
+                        author: "작성자",
+                        createdAt: "23.1.25",
+                        content: "Lorem ipsum dolor sit amet, consectetur."
+                    }
+                ]
+            }
+        ];
     },
     methods: {
         init() {
@@ -177,11 +127,6 @@ export default {
                     Object.assign(this.article, res.data);
                 })
                 .catch(console.error);
-        },
-        formatTextareaContent(input) {
-            if (!input) return [];
-
-            return input.split("\n").map((line) => (line === "" ? "<br>" : line));
         }
     }
 };

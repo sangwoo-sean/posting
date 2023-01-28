@@ -84,5 +84,9 @@ export default {
                 (typeof value === "object" && !Object.keys(value).length)
             );
         };
+        Vue.config.globalProperties.$formatTextareaContent = function (input) {
+            if (!input) return [];
+            return input.split("\n").map((line) => (line === "" ? "<br>" : line));
+        };
     }
 };
