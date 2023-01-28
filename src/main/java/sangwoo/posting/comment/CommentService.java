@@ -8,6 +8,8 @@ import sangwoo.posting.comment.dto.CommentDto;
 import sangwoo.posting.user.User;
 import sangwoo.posting.user.UserRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -15,18 +17,22 @@ public class CommentService {
     private final UserRepository userRepository;
     private final ArticleRepository articleRepository;
 
-    public void createComment(CommentDto commentDto) {
+    @Transactional
+    public Long createComment(CommentDto commentDto) {
         User user = userRepository.findById(commentDto.getUserId())
                 .orElseThrow(IllegalArgumentException::new);
 
         Article article = articleRepository.findById(commentDto.getArticleId())
                 .orElseThrow(IllegalArgumentException::new);
 
-        Comment parent = commentRepository.findById(commentDto.getParentId())
-                .orElse(null);
+        Comment parent = null;
+        if (commentDto.getParentId() != null) { //대댓글
+            parent = commentRepository.findById(commentDto.getParentId())
+                    .orElseThrow(IllegalArgumentException::new);
+        }
 
         Comment comment = Comment.create(commentDto, user, article, parent);
-
-        commentRepository.save(comment);
+        Comment save = commentRepository.save(comment);
+        return save.getId();
     }
 }

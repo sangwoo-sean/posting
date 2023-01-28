@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sangwoo.posting.comment.dto.CommentDto;
 
-import javax.transaction.Transactional;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("comment")
@@ -18,7 +16,6 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    @Transactional
     public ResponseEntity createComment(@ModelAttribute @Validated CommentDto commentDto) {
         commentService.createComment(commentDto);
         return ResponseEntity.ok(null);
