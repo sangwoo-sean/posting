@@ -167,3 +167,65 @@ button.btn.btn-dark:hover {
     right: 10px;
     bottom: 8px;
 }
+
+.comment-wrapper .input-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.comment-wrapper .input-area textarea {
+    flex: 1;
+    margin-right: 2rem;
+}
+
+.comment-wrapper .input-area button {
+    height: 2.5rem;
+}
+
+.comment {
+    padding: 2rem 0;
+}
+
+.comment:not(:last-child) {
+    border-bottom: 1px solid var(--color-light-grey);
+}
+
+.comment .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.comment .body {
+    text-align: left;
+}
+
+.comment .children {
+    margin: 2rem 0 0 2rem;
+}
+
+.comment .children .child {
+    padding: 2rem 0 2rem 2rem;
+    border-top: 1px solid var(--color-light-grey);
+    position: relative;
+}
+
+.comment .children .child::before {
+    content: "ㄴ";
+    position: absolute;
+    left: 0;
+    top: 30px;
+}
+
+.comment .children .child:last-child {
+    padding-bottom: 0;
+}
+
+.comments .comment .author::after {
+    content: " · ";
+}
+
+.comment textarea {
+    width: 100%;
+}

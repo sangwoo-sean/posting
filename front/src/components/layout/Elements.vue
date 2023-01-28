@@ -177,6 +177,151 @@
         </div>
 
         <hr />
+        <h1>comments</h1>
+        <div style="width: 50%">
+            <div class="comment-wrapper">
+                <div class="input-area">
+                    <textarea rows="3"></textarea>
+                    <button class="btn">comment</button>
+                </div>
+                <div class="comments">
+                    <div class="comment">
+                        <div class="header">
+                            <div>
+                                <span class="author">작성자</span>
+                                <span>23.1.25</span>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)"><span>reply</span></a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, porro.</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti distinctio
+                                dolores, eos harum hic incidunt, inventore itaque maiores minus quas ratione saepe sint
+                                velit voluptatem! Beatae cum odio quasi.
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aperiam deserunt eaque
+                                facere harum laboriosam laudantium maxime, nam necessitatibus odio placeat tempore!
+                                Alias aliquid consequuntur corporis debitis delectus dicta esse ex explicabo ipsum
+                                itaque, libero magni maiores modi molestias nemo nesciunt officiis provident qui
+                                sapiente suscipit tempora unde vero voluptates!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="header">
+                            <div>
+                                <span class="author">작성자</span>
+                                <span>23.1.25</span>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)"><span>reply</span></a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <p>comment</p>
+                            <p>comment</p>
+                            <p>comment</p>
+                        </div>
+                        <div class="input-area">
+                            <textarea rows="3"></textarea>
+                            <button class="btn">reply</button>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="header">
+                            <div>
+                                <span class="author">작성자</span>
+                                <span>23.1.25</span>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)"><span>reply</span></a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <span>comment</span>
+                        </div>
+                        <div class="input-area">
+                            <textarea rows="3"></textarea>
+                            <button class="btn">reply</button>
+                        </div>
+                        <div class="children">
+                            <div class="child">
+                                <div class="header">
+                                    <div>
+                                        <span class="author">작성자</span>
+                                        <span>23.1.25</span>
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    <p>comment</p>
+                                    <p>comment</p>
+                                    <p>comment</p>
+                                </div>
+                            </div>
+                            <div class="child">
+                                <div class="header">
+                                    <div>
+                                        <span class="author">작성자</span>
+                                        <span>23.1.25</span>
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    <p>comment</p>
+                                    <p>comment</p>
+                                    <p>comment</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="header">
+                            <div>
+                                <span class="author">작성자</span>
+                                <span>23.1.25</span>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)"><span>reply</span></a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <span>comment</span>
+                        </div>
+                        <div class="children">
+                            <div class="child">
+                                <div class="header">
+                                    <div>
+                                        <span class="author">작성자</span>
+                                        <span>23.1.25</span>
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    <p>comment</p>
+                                    <p>comment</p>
+                                    <p>comment</p>
+                                </div>
+                            </div>
+                            <div class="child">
+                                <div class="header">
+                                    <div>
+                                        <span class="author">작성자</span>
+                                        <span>23.1.25</span>
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    <p>comment</p>
+                                    <p>comment</p>
+                                    <p>comment</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

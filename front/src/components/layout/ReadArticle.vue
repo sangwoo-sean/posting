@@ -13,6 +13,139 @@
         <div class="article-detail">
             <p v-for="line in formatTextareaContent(article.content)" v-html="line"></p>
         </div>
+
+        <div class="comment-wrapper">
+            <div class="input-area">
+                <textarea rows="3"></textarea>
+                <button class="btn">comment</button>
+            </div>
+            <div class="comments">
+                <div class="comment">
+                    <div class="header">
+                        <div>
+                            <span class="author">작성자</span>
+                            <span>23.1.25</span>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)"><span>reply</span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p>comment</p>
+                        <p>comment</p>
+                        <p>comment</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="header">
+                        <div>
+                            <span class="author">작성자</span>
+                            <span>23.1.25</span>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)"><span>reply</span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p>comment</p>
+                        <p>comment</p>
+                        <p>comment</p>
+                    </div>
+                    <div class="input-area">
+                        <textarea rows="3"></textarea>
+                        <button class="btn">reply</button>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="header">
+                        <div>
+                            <span class="author">작성자</span>
+                            <span>23.1.25</span>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)"><span>reply</span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <span>comment</span>
+                    </div>
+                    <div class="input-area">
+                        <textarea rows="3"></textarea>
+                        <button class="btn">reply</button>
+                    </div>
+                    <div class="children">
+                        <div class="child">
+                            <div class="header">
+                                <div>
+                                    <span class="author">작성자</span>
+                                    <span>23.1.25</span>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <p>comment</p>
+                                <p>comment</p>
+                                <p>comment</p>
+                            </div>
+                        </div>
+                        <div class="child">
+                            <div class="header">
+                                <div>
+                                    <span class="author">작성자</span>
+                                    <span>23.1.25</span>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <p>comment</p>
+                                <p>comment</p>
+                                <p>comment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="header">
+                        <div>
+                            <span class="author">작성자</span>
+                            <span>23.1.25</span>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)"><span>reply</span></a>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <span>comment</span>
+                    </div>
+                    <div class="children">
+                        <div class="child">
+                            <div class="header">
+                                <div>
+                                    <span class="author">작성자</span>
+                                    <span>23.1.25</span>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <p>comment</p>
+                                <p>comment</p>
+                                <p>comment</p>
+                            </div>
+                        </div>
+                        <div class="child">
+                            <div class="header">
+                                <div>
+                                    <span class="author">작성자</span>
+                                    <span>23.1.25</span>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <p>comment</p>
+                                <p>comment</p>
+                                <p>comment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -54,4 +187,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.article-detail {
+    min-height: 30rem;
+}
+</style>
