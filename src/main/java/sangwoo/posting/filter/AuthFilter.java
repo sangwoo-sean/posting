@@ -22,6 +22,7 @@ public class AuthFilter implements Filter {
     private final JwtProvider jwtProvider;
 
     private final List<String> allowedUrls = new ArrayList<>();
+    private final List<String> allowedUrlsRegex = new ArrayList<>();
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -29,6 +30,9 @@ public class AuthFilter implements Filter {
         allowedUrls.add("/logout");
         allowedUrls.add("/signup");
         allowedUrls.add("/article/list");
+        allowedUrls.add("/article/*");
+
+        allowedUrlsRegex.add("^/article/(\\d)*$");
     }
 
     @Override
@@ -36,7 +40,8 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        if (allowedUrls.contains(req.getRequestURI())) {
+        if (allowedUrls.contains(req.getRequestURI()) ||
+                allowedUrlsRegex.stream().anyMatch(regex -> req.getRequestURI().matches(regex))) {
             chain.doFilter(request, response);
             return;
         }
