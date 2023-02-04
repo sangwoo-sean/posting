@@ -14,7 +14,7 @@
             <p v-for="line in $formatTextareaContent(article.content)" v-html="line"></p>
         </div>
 
-        <h4>comments ({{ article.comments.length }})</h4>
+        <h4>comments ({{ commentCount }})</h4>
         <div class="comment-wrapper">
             <div class="input-area">
                 <textarea rows="3"></textarea>
@@ -76,7 +76,8 @@ export default {
                 viewCount: 0,
                 tags: [],
                 comments: []
-            }
+            },
+            commentCount: 0
         };
     },
     created() {
@@ -89,6 +90,7 @@ export default {
                 .get(process.env.VUE_APP_API_URL + "/article/" + articleId)
                 .then((res) => {
                     Object.assign(this.article, res.data);
+                    this.commentCount = this.article.comments.length;
                     this.article.comments.forEach(
                         (comment) => (comment.createdAt = new Date(comment.createdAt).toLocaleString())
                     );
