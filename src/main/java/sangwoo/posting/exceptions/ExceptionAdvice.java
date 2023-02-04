@@ -20,6 +20,15 @@ public class ExceptionAdvice {
         return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(InvalidUserEmailException.class)
+    public ResponseEntity<String> InvalidUserEmailException(InvalidUserEmailException e) {
+        String message = "유효하지 않은 이메일입니다.";
+        if (e.getMessage() != null) {
+            message = e.getMessage();
+        }
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(InvalidUserPasswordException.class)
     public ResponseEntity<String> InvalidUserPasswordException(InvalidUserPasswordException e) {
         String message = "유효하지 않은 비밀번호입니다.";
