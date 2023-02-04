@@ -7,7 +7,7 @@ import Signup from "@/components/Signup.vue";
 import Elements from "@/components/layout/Elements.vue";
 import MyPage from "@/components/MyPage.vue";
 import WriteArticle from "@/components/WriteArticle.vue";
-import ReadArticle from "@/components/layout/ReadArticle.vue";
+import ReadArticle from "@/components/ReadArticle.vue";
 
 import { useUserStore } from "@/stores/userStore";
 

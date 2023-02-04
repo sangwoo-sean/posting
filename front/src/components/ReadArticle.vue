@@ -132,6 +132,6 @@ export default {
 
 <style scoped>
 .article-detail {
-    min-height: 30rem;
+    min-height: 20rem;
 }
 </style>
