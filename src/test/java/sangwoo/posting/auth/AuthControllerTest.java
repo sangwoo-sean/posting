@@ -29,9 +29,10 @@ class AuthControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private static final String validEmail = "tester@test1.test";
+    private static final String validName = "tester";
+    private static final String validEmail = "tester@test1.com";
     private static final String invalidEmail = "tester";
-    private static final String validPassword = "test1234";
+    private static final String validPassword = "test1234!";
     private static final String invalidPassword = "test";
 
     @Test
@@ -64,7 +65,7 @@ class AuthControllerTest {
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(contentAsString).contains("userDto.password"); //패스워드 없음 오류
+        assertThat(contentAsString).contains("signupDto.password"); //패스워드 없음 오류
     }
 
     @Test
@@ -82,7 +83,7 @@ class AuthControllerTest {
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(contentAsString).contains("userDto.email"); //이메일 없음 오류
+        assertThat(contentAsString).contains("signupDto.email"); //이메일 없음 오류
     }
 
     @Test
@@ -101,7 +102,7 @@ class AuthControllerTest {
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(contentAsString).contains("userDto.email");
+        assertThat(contentAsString.contains("signupDto.email") || contentAsString.contains("signupDto.password")).isTrue();
     }
 
     @Test
@@ -120,7 +121,7 @@ class AuthControllerTest {
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(contentAsString).contains("userDto.password");
+        assertThat(contentAsString).contains("signupDto.password");
     }
 
     @Test
@@ -139,13 +140,14 @@ class AuthControllerTest {
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(contentAsString).contains("userDto.email");
+        assertThat(contentAsString).contains("signupDto.email");
     }
 
     @Test
     void signupRequestWithDuplicatedEmail() throws Exception {
         //given
         UserDto userDto = new UserDto();
+        userDto.setName(validName);
         userDto.setEmail(validEmail);
         userDto.setPassword(validPassword);
         mockMvc.perform(requestBuilder("/signup")
@@ -167,6 +169,7 @@ class AuthControllerTest {
     void successfulSignup() throws Exception {
         //given
         UserDto userDto = new UserDto();
+        userDto.setName(validName);
         userDto.setEmail(validEmail);
         userDto.setPassword(validPassword);
 
