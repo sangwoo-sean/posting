@@ -15,6 +15,7 @@ const authLogin = (to, from, next) => {
     if (!useUserStore().userId) {
         next({ path: "/login", query: { redirect: to.fullPath } });
     }
+    return next();
 };
 
 const routes = [
