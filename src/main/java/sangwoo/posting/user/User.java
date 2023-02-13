@@ -3,6 +3,7 @@ package sangwoo.posting.user;
 import lombok.Getter;
 import sangwoo.posting.article.Article;
 import sangwoo.posting.auth.dto.SignupDto;
+import sangwoo.posting.point.ResearchPoint;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,6 +26,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Article> articles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<ResearchPoint> points = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
