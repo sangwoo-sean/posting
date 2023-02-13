@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ArticleListDto {
 
-    private Long id;
+    private long id;
     private String title;
     private String content;
     private Long viewCount;

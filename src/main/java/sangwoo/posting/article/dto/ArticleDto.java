@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ArticleDto {
 
-    private Long id;
+    private long id;
 
     @NotBlank(message = "제목은 공백일 수 없습니다.")
     @Size(max = 100, message = "제목은 100자를 넘을 수 없습니다.")

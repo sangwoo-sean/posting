@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentCreateDto {
-    private Long id;
+    private long id;
     @NotEmpty
     private String content;
     @NotNull
