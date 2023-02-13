@@ -2,7 +2,6 @@ package sangwoo.posting.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,31 +21,20 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("login")
-    public ResponseEntity login(@Validated @RequestBody LoginDto loginDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest()
-                    .body(bindingResult.getFieldError());
-        }
-
+    public ResponseEntity<LoginResponseDto> login(@Validated @RequestBody LoginDto loginDto) {
         LoginResponseDto response = authService.login(loginDto);
-
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("signup")
     @Transactional
-    public ResponseEntity signup(@Validated @RequestBody SignupDto signupDto, BindingResult bindingResult) { //회원가입
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest()
-                    .body(bindingResult.getFieldError());
-        }
-
+    public ResponseEntity<Boolean> signup(@Validated @RequestBody SignupDto signupDto) { //회원가입
         boolean success = userService.createUser(signupDto);
         return ResponseEntity.ok(success);
     }
 
     @PostMapping("logout")
-    public ResponseEntity logout() { //로그아웃
+    public ResponseEntity<Void> logout() { //로그아웃
         //todo: something
         return ResponseEntity.ok(null);
     }

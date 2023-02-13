@@ -4,12 +4,22 @@ import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
 public class ExceptionAdvice {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> MethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        String message = "valid failed";
+        FieldError fieldError = e.getBindingResult().getFieldError();
+        if (fieldError != null) message = fieldError.getDefaultMessage();
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<String> ExpiredJwtException(ExpiredJwtException e) {
