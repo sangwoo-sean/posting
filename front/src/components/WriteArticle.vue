@@ -52,7 +52,7 @@ export default {
 
             const params = { title: this.title, content: this.content, userId: this.userStore.userId, tags: this.tags };
             axios
-                .post(process.env.VUE_APP_API_URL + "/article", params)
+                .post(process.env.VUE_APP_API_URL + "/articles", params)
                 .then((res) => {
                     console.log(res);
                     alert("아티클이 등록되었습니다");

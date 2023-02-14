@@ -62,7 +62,7 @@ export default {
         },
         findAllArticles() {
             axios
-                .get(process.env.VUE_APP_API_URL + "/article/list")
+                .get(process.env.VUE_APP_API_URL + "/articles")
                 .then((res) => {
                     this.articles = res.data;
                 })

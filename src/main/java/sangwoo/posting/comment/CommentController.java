@@ -11,7 +11,7 @@ import sangwoo.posting.comment.dto.CommentCreateDto;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("comment")
+@RequestMapping("comments")
 public class CommentController {
     private final CommentService commentService;
 

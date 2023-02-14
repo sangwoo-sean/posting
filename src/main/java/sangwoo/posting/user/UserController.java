@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import sangwoo.posting.user.dto.UserDto;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 @RequiredArgsConstructor
 public class UserController {
 

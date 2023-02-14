@@ -87,7 +87,7 @@ export default {
         init() {
             let articleId = this.$route.params.articleId;
             axios
-                .get(process.env.VUE_APP_API_URL + "/article/" + articleId)
+                .get(process.env.VUE_APP_API_URL + "/articles/" + articleId)
                 .then((res) => {
                     Object.assign(this.article, res.data);
                     this.commentCount = this.article.comments.length;
@@ -113,7 +113,7 @@ export default {
             }
 
             axios
-                .post(process.env.VUE_APP_API_URL + "/comment", params)
+                .post(process.env.VUE_APP_API_URL + "/comments", params)
                 .then((res) => {
                     console.log(res);
                     e.target.previousSibling.value = "";

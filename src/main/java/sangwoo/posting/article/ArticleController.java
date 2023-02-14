@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("article")
+@RequestMapping("articles")
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -28,7 +28,7 @@ public class ArticleController {
         return ResponseEntity.ok(articleDto);
     }
 
-    @GetMapping("list")
+    @GetMapping
     public ResponseEntity<List<ArticleListDto>> findAllArticles() {
         List<ArticleListDto> articleList = articleService.findAllArticles();
         return ResponseEntity.ok(articleList);
