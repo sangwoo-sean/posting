@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,13 +27,15 @@ public class AuthFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        allowedUrls.add("/login");
-        allowedUrls.add("/logout");
-        allowedUrls.add("/signup");
-        allowedUrls.add("/article/list");
-        allowedUrls.add("/article/*");
+        allowedUrls.addAll(Arrays.asList(
+                "/login",
+                "/logout",
+                "/signup",
+                "/articles/list",
+                "/articles"
+        ));
 
-        allowedUrlsRegex.add("^/article/(\\d)*$");
+        allowedUrlsRegex.add("^/articles/(\\d)*$");
     }
 
     @Override
