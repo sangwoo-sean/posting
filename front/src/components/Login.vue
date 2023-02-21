@@ -1,5 +1,6 @@
 <template>
     <div class="d-flex-center flex-col w20 m-auto">
+        <img src="@/assets/image/banner.png" alt="banner" style="width: 30rem" />
         <h2>로그인</h2>
         <div class="input-group">
             <label>이메일</label>

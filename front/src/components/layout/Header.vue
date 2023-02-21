@@ -2,7 +2,7 @@
     <header>
         <div class="header-logo">
             <router-link to="/">
-                <img src="https://via.placeholder.com/200x50" alt="logo" />
+                <img src="@/assets/svg/logo-green.svg" alt="logo" width="200" />
             </router-link>
         </div>
 
