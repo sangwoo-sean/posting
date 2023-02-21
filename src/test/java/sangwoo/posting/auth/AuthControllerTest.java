@@ -63,9 +63,9 @@ class AuthControllerTest {
         //then
         String contentAsString = actions
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
-                .andReturn().getResponse().getContentAsString();
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        assertThat(contentAsString).contains("signupDto.password"); //패스워드 없음 오류
+        assertThat(contentAsString).contains("비밀번호");
     }
 
     @Test
@@ -81,9 +81,9 @@ class AuthControllerTest {
         //then
         String contentAsString = actions
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
-                .andReturn().getResponse().getContentAsString();
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        assertThat(contentAsString).contains("signupDto.email"); //이메일 없음 오류
+        assertThat(contentAsString).contains("이메일");
     }
 
     @Test
@@ -100,9 +100,9 @@ class AuthControllerTest {
         //then
         String contentAsString = actions
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
-                .andReturn().getResponse().getContentAsString();
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        assertThat(contentAsString.contains("signupDto.email") || contentAsString.contains("signupDto.password")).isTrue();
+        assertThat(contentAsString.contains("비밀번호") || contentAsString.contains("이메일")).isTrue();
     }
 
     @Test
@@ -119,9 +119,9 @@ class AuthControllerTest {
         //then
         String contentAsString = actions
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
-                .andReturn().getResponse().getContentAsString();
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        assertThat(contentAsString).contains("signupDto.password");
+        assertThat(contentAsString).contains("비밀번호");
     }
 
     @Test
@@ -138,9 +138,9 @@ class AuthControllerTest {
         //then
         String contentAsString = actions
                 .andExpect(status().is(HttpServletResponse.SC_BAD_REQUEST))
-                .andReturn().getResponse().getContentAsString();
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        assertThat(contentAsString).contains("signupDto.email");
+        assertThat(contentAsString).contains("이메일");
     }
 
     @Test
